@@ -1,14 +1,14 @@
 /* --- Body --- */
 body {
   font-family: Arial, sans-serif;
-  background-color: #ffffff; /* keep white background */
+  background-color: #ffffff; /* white background */
   color: #1a1a1a;
   text-align: center;
   margin: 0;
   line-height: 1.6;
 }
 
-/* --- Liquid Glass Navbar --- */
+/* --- Liquid Glass Navbar with Gradient Background --- */
 nav {
   position: sticky;
   top: 0;
@@ -26,6 +26,9 @@ nav {
   box-shadow: 0 8px 32px rgba(0,0,0,0.08);
   border-radius: 0 0 18px 18px;
   transition: background 0.3s ease, box-shadow 0.3s ease;
+
+  /* Subtle gradient behind the navbar for better effect */
+  background-image: linear-gradient(to bottom, rgba(255,255,255,0.6), rgba(245,247,251,0.6));
 }
 
 nav:hover {
