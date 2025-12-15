@@ -72,6 +72,11 @@ h2 {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2rem;
+  overflow: visible; /* allow image hover to show outside grid cell */
+}
+
+.feature {
+  overflow: visible; /* allow image to scale outside parent */
 }
 
 .feature img {
