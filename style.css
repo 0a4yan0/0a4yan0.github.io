@@ -7,3 +7,16 @@ body {
   margin: 0;
   line-height: 1.6;
 }
+
+.feature img {
+  width: 100%;
+  border-radius: 18px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer; /* makes it clear it's interactive */
+}
+
+.feature img:hover {
+  transform: scale(1.05); /* grows slightly */
+  box-shadow: 0 16px 40px rgba(0,0,0,0.18);
+}
