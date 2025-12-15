@@ -1,17 +1,153 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>My Page</title>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <title>Oxford Response</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #0b0e14;
+      color: #e6e6e6;
+      line-height: 1.6;
+    }
+    nav {
+      position: sticky;
+      top: 0;
+      background: #0f1426;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 10;
+    }
+    nav strong {
+      font-size: 1.1rem;
+    }
+    nav a {
+      color: #b8c0ff;
+      margin-left: 1.25rem;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    header {
+      padding: 5rem 1.5rem 4rem;
+      text-align: center;
+      background: linear-gradient(180deg, #11162a, #0b0e14);
+    }
+    header h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+    header p {
+      max-width: 720px;
+      margin: 0 auto;
+      font-size: 1.05rem;
+      color: #d6d9ff;
+    }
+    section {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem;
+    }
+    h2 {
+      margin-bottom: 1.5rem;
+    }
+    .card {
+      background: #12172b;
+      border-radius: 16px;
+      padding: 1.75rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+    }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.25rem;
+      text-align: center;
+    }
+    .stat h3 {
+      font-size: 2.2rem;
+      margin: 0;
+      color: #7aa2ff;
+    }
+    .stat p {
+      margin: 0.25rem 0 0;
+      color: #b8c0ff;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: #888;
+      font-size: 0.9rem;
+    }
+  </style>
 </head>
 <body>
-  <h1>Hello.</h1>
-  <p>This is my personal webpage.</p>
+
+<nav>
+  <strong>Oxford Response</strong>
+  <div>
+    <a href="index.html">Home</a>
+    <a href="story.html">Story</a>
+    <a href="teams.html">Teams</a>
+    <a href="roleplay.html">Roleplay</a>
+    <a href="staff.html">Our Team</a>
+  </div>
+</nav>
+
+<header>
+  <h1>Oxford Response</h1>
+  <p>
+    Enforce the law, challenge it or save lives — inside Oxford Response.
+    <br><br>
+    Oxford Response is an Emergency Response roleplay experience based in Oxford,
+    England, UK. Become a police officer, medic or criminal — the choice is yours.
+  </p>
+</header>
+
+<section>
+  <h2>Live Game Statistics</h2>
+  <div class="card stats">
+    <div class="stat">
+      <h3 id="visits">—</h3>
+      <p>Visits</p>
+    </div>
+    <div class="stat">
+      <h3 id="playing">—</h3>
+      <p>Players Online</p>
+    </div>
+    <div class="stat">
+      <h3 id="favorites">—</h3>
+      <p>Favorites</p>
+    </div>
+    <div class="stat">
+      <h3>Live</h3>
+      <p>Game Status</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © Oxford Response · Roblox
+</footer>
+
+<script>
+  // Fetch live Roblox game stats
+  fetch("https://games.roblox.com/v1/games?universeIds=84910716336888")
+    .then(res => res.json())
+    .then(data => {
+      const game = data.data[0];
+      document.getElementById("visits").textContent = game.visits.toLocaleString();
+      document.getElementById("playing").textContent = game.playing.toLocaleString();
+      document.getElementById("favorites").textContent = game.favoritedCount.toLocaleString();
+    })
+    .catch(() => {
+      document.getElementById("visits").textContent = "N/A";
+      document.getElementById("playing").textContent = "N/A";
+      document.getElementById("favorites").textContent = "N/A";
+    });
+</script>
+
 </body>
 </html>
-
-<head>
-  <title>My Page</title>
-  <meta charset="UTF-8">
-  <link rel="stylesheet" href="style.css">
-</head>
