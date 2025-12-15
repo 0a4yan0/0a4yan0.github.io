@@ -8,7 +8,7 @@ body {
   line-height: 1.6;
 }
 
-/* --- Liquid Glass Navbar with Gradient Background --- */
+/* --- True Frosted Glass Navbar --- */
 nav {
   position: sticky;
   top: 0;
@@ -18,21 +18,18 @@ nav {
   padding: 1rem 2rem;
   z-index: 10;
 
-  /* Liquid glass effect */
-  background: rgba(255, 255, 255, 0.6); /* translucent white */
+  /* frosted glass effect */
+  background: rgba(255, 255, 255, 0.25); /* transparent */
   backdrop-filter: blur(15px) saturate(180%);
   -webkit-backdrop-filter: blur(15px) saturate(180%);
   border-bottom: 1px solid rgba(0,0,0,0.1);
   box-shadow: 0 8px 32px rgba(0,0,0,0.08);
   border-radius: 0 0 18px 18px;
   transition: background 0.3s ease, box-shadow 0.3s ease;
-
-  /* Subtle gradient behind the navbar for better effect */
-  background-image: linear-gradient(to bottom, rgba(255,255,255,0.6), rgba(245,247,251,0.6));
 }
 
 nav:hover {
-  background: rgba(255,255,255,0.75);
+  background: rgba(255,255,255,0.35);
   box-shadow: 0 12px 40px rgba(0,0,0,0.12);
 }
 
