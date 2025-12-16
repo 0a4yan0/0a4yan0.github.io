@@ -7,14 +7,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     html{scroll-behavior:smooth;}
-    body{margin:0;font-family:Arial,sans-serif;background:#fff;color:#1a1a1a;line-height:1.6;}
+    body{margin:0;font-family:Arial,sans-serif;background:#fff;color:#1a1a1a;line-height:1.6;opacity:0;transition:opacity 0.5s ease;}
+    body.fade-in{opacity:1;}
+
     nav{position:sticky;top:0;background:#fff;border-bottom:1px solid #e6e6e6;padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;z-index:10;}
     nav img{height:32px;}
     nav a{color:#1a1a1a;margin-left:1.25rem;text-decoration:none;font-weight:500;cursor:pointer;}
     nav a:hover{color:#1f4fff;}
+
     header{padding:4rem 1.5rem 3rem;text-align:center;background:#f5f7fb;}
     header h1{margin-bottom:0.5rem;font-size:2.5rem;}
     header p{max-width:720px;margin:0 auto;color:#444;}
+
     section{max-width:1200px;margin:0 auto;padding:4rem 1.5rem;}
     .teams{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2rem;}
     .team-card{background:#1e1e1e;color:#fff;border-radius:18px;overflow:hidden;box-shadow:0 12px 30px rgba(0,0,0,0.15);transition:background 0.35s ease, transform 0.35s ease;cursor:pointer;}
@@ -59,5 +63,28 @@
   </section>
 
   <footer>Oxford Response · Roblox</footer>
+
+  <script>
+    // Fade-in page
+    window.addEventListener('DOMContentLoaded',()=>document.body.classList.add('fade-in'));
+
+    // Fade-out on nav links
+    const links = document.querySelectorAll('nav a');
+    links.forEach(link => {
+      link.addEventListener('click', function(e){
+        e.preventDefault();
+        const href = this.getAttribute('href');
+
+        // Scroll to top if same page
+        if(href === "teams.html" && window.location.pathname.endsWith("teams.html")){
+          document.getElementById('top').scrollIntoView({behavior:'smooth'});
+          return;
+        }
+
+        document.body.style.opacity = 0;
+        setTimeout(()=>window.location.href=href,400);
+      });
+    });
+  </script>
 </body>
 </html>
