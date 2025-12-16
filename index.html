@@ -206,20 +206,37 @@
 </footer>
 
 <script>
-  // Fetch live Roblox game stats
-  fetch("https://oxford-response-stats.aayan-sb.workers.dev")
-    .then(res => res.json())
-    .then(data => {
-      const game = data.data[0];
-      document.getElementById("visits").textContent = game.visits.toLocaleString();
-      document.getElementById("playing").textContent = game.playing.toLocaleString();
-      document.getElementById("favorites").textContent = game.favoritedCount.toLocaleString();
-    })
-    .catch(() => {
+  const workerUrl = "https://oxford-response-stats.aayan-sb.workers.dev";
+
+  async function updateStats() {
+    try {
+      const res = await fetch(workerUrl);
+      const data = await res.json();
+
+      if (data && data.data && data.data.length > 0) {
+        const game = data.data[0];
+
+        document.getElementById("visits").textContent = game.visits?.toLocaleString() || "N/A";
+        document.getElementById("playing").textContent = game.playing?.toLocaleString() || "N/A";
+        document.getElementById("favorites").textContent = game.favoritedCount?.toLocaleString() || "N/A";
+      } else {
+        document.getElementById("visits").textContent = "N/A";
+        document.getElementById("playing").textContent = "N/A";
+        document.getElementById("favorites").textContent = "N/A";
+      }
+    } catch (err) {
+      console.error("Failed to fetch stats:", err);
       document.getElementById("visits").textContent = "N/A";
       document.getElementById("playing").textContent = "N/A";
       document.getElementById("favorites").textContent = "N/A";
-    });
+    }
+  }
+
+  // Initial load
+  updateStats();
+
+  // Auto-update every 15 seconds
+  setInterval(updateStats, 15000);
 </script>
 
 </body>
