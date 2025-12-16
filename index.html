@@ -126,6 +126,15 @@
       color: #555;
     }
 
+    /* Online/Offline status colors */
+    .online {
+      color: #28a745; /* green */
+    }
+
+    .offline {
+      color: #dc3545; /* red */
+    }
+
     /* --- Footer --- */
     footer {
       text-align: center;
@@ -195,18 +204,41 @@
       <p>Favorites</p>
     </div>
     <div class="stat">
-      <h3>Live</h3>
+      <h3 id="status">—</h3>
       <p>Game Status</p>
     </div>
   </div>
 </section>
 
 <footer>
-  Oxford Response · Webpage brought to you by ._a4yan
+  Oxford Response · Roblox
 </footer>
 
 <script>
   const workerUrl = "https://oxford-response-stats.aayan-sb.workers.dev";
+
+  // Animate numbers from start to end
+  function animateValue(element, start, end, duration) {
+    start = start || 0;
+    end = end || 0;
+    const range = end - start;
+    const minTimer = 50;
+    const stepTime = Math.max(Math.floor(duration / Math.abs(range)), minTimer);
+    let startTime = null;
+
+    function step(timestamp) {
+      if (!startTime) startTime = timestamp;
+      const progress = timestamp - startTime;
+      let value = Math.floor(start + (range * (progress / duration)));
+      if ((range > 0 && value > end) || (range < 0 && value < end)) value = end;
+      element.textContent = value.toLocaleString();
+      if (value !== end) {
+        requestAnimationFrame(step);
+      }
+    }
+
+    requestAnimationFrame(step);
+  }
 
   async function updateStats() {
     try {
@@ -216,19 +248,38 @@
       if (data && data.data && data.data.length > 0) {
         const game = data.data[0];
 
-        document.getElementById("visits").textContent = game.visits?.toLocaleString() || "N/A";
-        document.getElementById("playing").textContent = game.playing?.toLocaleString() || "N/A";
-        document.getElementById("favorites").textContent = game.favoritedCount?.toLocaleString() || "N/A";
+        const visitsEl = document.getElementById("visits");
+        const playingEl = document.getElementById("playing");
+        const favoritesEl = document.getElementById("favorites");
+        const statusEl = document.getElementById("status");
+
+        animateValue(visitsEl, parseInt(visitsEl.textContent.replace(/,/g,'')) || 0, game.visits || 0, 1000);
+        animateValue(playingEl, parseInt(playingEl.textContent.replace(/,/g,'')) || 0, game.playing || 0, 1000);
+        animateValue(favoritesEl, parseInt(favoritesEl.textContent.replace(/,/g,'')) || 0, game.favoritedCount || 0, 1000);
+
+        // Dynamic Online/Offline status
+        if (game.playing > 0) {
+          statusEl.textContent = "Online";
+          statusEl.classList.add("online");
+          statusEl.classList.remove("offline");
+        } else {
+          statusEl.textContent = "Offline";
+          statusEl.classList.add("offline");
+          statusEl.classList.remove("online");
+        }
+
       } else {
-        document.getElementById("visits").textContent = "N/A";
-        document.getElementById("playing").textContent = "N/A";
-        document.getElementById("favorites").textContent = "N/A";
+        ["visits","playing","favorites","status"].forEach(id => {
+          const el = document.getElementById(id);
+          if (el) el.textContent = "N/A";
+        });
       }
     } catch (err) {
       console.error("Failed to fetch stats:", err);
-      document.getElementById("visits").textContent = "N/A";
-      document.getElementById("playing").textContent = "N/A";
-      document.getElementById("favorites").textContent = "N/A";
+      ["visits","playing","favorites","status"].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = "N/A";
+      });
     }
   }
 
