@@ -17,6 +17,12 @@
       background: #ffffff;
       color: #1a1a1a;
       line-height: 1.6;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    body.fade-in {
+      opacity: 1;
     }
 
     /* --- Navbar --- */
@@ -116,21 +122,10 @@
     }
 
     /* --- Team Colours on Hover --- */
-    .civilian:hover {
-      background: #6e6e6e;
-    }
-
-    .police:hover {
-      background: #1f4fff;
-    }
-
-    .nhs:hover {
-      background: #1b8f4b;
-    }
-
-    .highways:hover {
-      background: #e67e22;
-    }
+    .civilian:hover { background: #6e6e6e; }
+    .police:hover { background: #1f4fff; }
+    .nhs:hover { background: #1b8f4b; }
+    .highways:hover { background: #e67e22; }
 
     /* --- Footer --- */
     footer {
@@ -211,11 +206,31 @@
 </footer>
 
 <script>
-  // Smooth scroll to top when clicking "Teams" in navbar
-  const teamsLink = document.getElementById('teams-link');
-  teamsLink.addEventListener('click', (e) => {
-    e.preventDefault();
-    document.getElementById('top').scrollIntoView({ behavior: 'smooth' });
+  // Fade in on page load
+  window.addEventListener('DOMContentLoaded', () => {
+    document.body.classList.add('fade-in');
+  });
+
+  // Smooth scroll for Teams link and fade-out for all navbar links
+  const links = document.querySelectorAll('nav a');
+  links.forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const href = link.getAttribute('href');
+
+      // Scroll to top if Teams link clicked
+      if(link.id === 'teams-link') {
+        document.getElementById('top').scrollIntoView({ behavior: 'smooth' });
+      }
+
+      // Fade out current page
+      document.body.classList.remove('fade-in');
+      document.body.style.opacity = 0;
+
+      setTimeout(() => {
+        if(link.id !== 'teams-link') window.location.href = href;
+      }, 400); // matches CSS transition
+    });
   });
 </script>
 
