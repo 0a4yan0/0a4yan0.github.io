@@ -41,6 +41,7 @@
       margin-left: 1.25rem;
       text-decoration: none;
       font-weight: 500;
+      cursor: pointer;
     }
 
     nav a:hover {
@@ -143,14 +144,17 @@
 </head>
 <body>
 
+<!-- Top anchor -->
+<div id="top"></div>
+
 <nav>
   <div>
     <img src="logo.svg" alt="Oxford Response Logo">
   </div>
   <div>
     <a href="index.html">Home</a>
+    <a id="teams-link">Teams</a>
     <a href="story.html">Story</a>
-    <a href="teams.html">Teams</a>
     <a href="roleplay.html">Roleplay</a>
     <a href="staff.html">Our Team</a>
   </div>
@@ -184,5 +188,36 @@
     </div>
 
     <div class="team-card nhs">
-      <
+      <img src="nhs.webp" alt="NHS">
+      <div class="team-info">
+        <h3>NHS</h3>
+        <p>Save lives and provide medical assistance in emergencies throughout the city.</p>
+      </div>
+    </div>
 
+    <div class="team-card highways">
+      <img src="highways.webp" alt="Highways">
+      <div class="team-info">
+        <h3>Highways</h3>
+        <p>Manage traffic, maintain roads, and ensure smooth transportation across Oxford.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  Oxford Response · Roblox
+</footer>
+
+<script>
+  // Smooth scroll to top when clicking "Teams" in navbar
+  const teamsLink = document.getElementById('teams-link');
+  teamsLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    document.getElementById('top').scrollIntoView({ behavior: 'smooth' });
+  });
+</script>
+
+</body>
+</html>
