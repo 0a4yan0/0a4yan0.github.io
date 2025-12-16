@@ -11,14 +11,19 @@
       scroll-behavior: smooth;
     }
 
-    /* --- Body --- */
     body {
       font-family: Arial, sans-serif;
-      background-color: #ffffff; /* white background */
+      background-color: #ffffff;
       color: #1a1a1a;
       text-align: center;
       margin: 0;
       line-height: 1.6;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    body.fade-in {
+      opacity: 1;
     }
 
     /* --- Navbar --- */
@@ -45,6 +50,7 @@
       text-decoration: none;
       font-weight: 500;
       transition: color 0.2s ease;
+      cursor: pointer;
     }
 
     nav a:hover {
@@ -59,7 +65,7 @@
     }
 
     header img {
-      height: 120px; /* bigger header logo */
+      height: 120px;
       margin-bottom: 1rem;
     }
 
@@ -128,14 +134,8 @@
       color: #555;
     }
 
-    /* Online/Offline status colors */
-    .online {
-      color: #28a745; /* green */
-    }
-
-    .offline {
-      color: #dc3545; /* red */
-    }
+    .online { color: #28a745; }
+    .offline { color: #dc3545; }
 
     /* --- Footer --- */
     footer {
@@ -149,7 +149,6 @@
 </head>
 <body>
 
-<!-- Top anchor for smooth scroll -->
 <div id="top"></div>
 
 <nav>
@@ -157,9 +156,9 @@
     <img src="logo.svg" alt="Oxford Response Logo">
   </div>
   <div>
-    <a href="#top">Home</a>
+    <a href="index.html">Home</a>
+    <a id="teams-link">Teams</a>
     <a href="story.html">Story</a>
-    <a href="teams.html">Teams</a>
     <a href="roleplay.html">Roleplay</a>
     <a href="staff.html">Our Team</a>
   </div>
@@ -178,15 +177,9 @@
 <section>
   <h2>Choose Your Path</h2>
   <div class="features">
-    <div class="feature">
-      <img src="fight-crime.webp" alt="Fight crime">
-    </div>
-    <div class="feature">
-      <img src="save-lives.webp" alt="Save lives">
-    </div>
-    <div class="feature">
-      <img src="get-rich.webp" alt="Get rich">
-    </div>
+    <div class="feature"><img src="fight-crime.webp" alt="Fight crime"></div>
+    <div class="feature"><img src="save-lives.webp" alt="Save lives"></div>
+    <div class="feature"><img src="get-rich.webp" alt="Get rich"></div>
   </div>
 </section>
 
@@ -219,7 +212,32 @@
 <script>
   const workerUrl = "https://oxford-response-stats.aayan-sb.workers.dev";
 
-  // Slot-machine style animation
+  // Fade in page
+  window.addEventListener('DOMContentLoaded', () => {
+    document.body.classList.add('fade-in');
+  });
+
+  // Fade out and smooth scroll
+  const links = document.querySelectorAll('nav a');
+  links.forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const href = link.getAttribute('href');
+
+      if(link.id === 'teams-link') {
+        document.getElementById('top').scrollIntoView({ behavior: 'smooth' });
+      }
+
+      document.body.classList.remove('fade-in');
+      document.body.style.opacity = 0;
+
+      setTimeout(() => {
+        if(link.id !== 'teams-link') window.location.href = href;
+      }, 400);
+    });
+  });
+
+  // Slot-machine animation for stats
   function animateDigits(element, targetValue, duration = 800) {
     const oldValue = parseInt(element.textContent.replace(/,/g,'')) || 0;
     const newStr = targetValue.toString();
@@ -229,7 +247,6 @@
     function step(timestamp) {
       if (!startTime) startTime = timestamp;
       const progress = Math.min((timestamp - startTime) / duration, 1);
-
       let display = "";
       for (let i = 0; i < newStr.length; i++) {
         const startDigit = parseInt(oldStr[i]);
@@ -238,7 +255,6 @@
         display += currentDigit;
       }
       element.textContent = parseInt(display).toLocaleString();
-
       if (progress < 1) requestAnimationFrame(step);
     }
     requestAnimationFrame(step);
@@ -251,18 +267,12 @@
 
       if (data && data.data && data.data.length > 0) {
         const game = data.data[0];
+        animateDigits(document.getElementById("visits"), game.visits || 0);
+        animateDigits(document.getElementById("playing"), game.playing || 0);
+        animateDigits(document.getElementById("favorites"), game.favoritedCount || 0);
 
-        const visitsEl = document.getElementById("visits");
-        const playingEl = document.getElementById("playing");
-        const favoritesEl = document.getElementById("favorites");
         const statusEl = document.getElementById("status");
-
-        animateDigits(visitsEl, game.visits || 0);
-        animateDigits(playingEl, game.playing || 0);
-        animateDigits(favoritesEl, game.favoritedCount || 0);
-
-        // Dynamic Online/Offline status
-        if (game.playing > 0) {
+        if(game.playing > 0) {
           statusEl.textContent = "Online";
           statusEl.classList.add("online");
           statusEl.classList.remove("offline");
@@ -274,22 +284,19 @@
       } else {
         ["visits","playing","favorites","status"].forEach(id => {
           const el = document.getElementById(id);
-          if (el) el.textContent = "N/A";
+          if(el) el.textContent = "N/A";
         });
       }
     } catch (err) {
       console.error("Failed to fetch stats:", err);
       ["visits","playing","favorites","status"].forEach(id => {
         const el = document.getElementById(id);
-        if (el) el.textContent = "N/A";
+        if(el) el.textContent = "N/A";
       });
     }
   }
 
-  // Initial load
   updateStats();
-
-  // Auto-update every 15 seconds
   setInterval(updateStats, 15000);
 </script>
 
