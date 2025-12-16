@@ -119,6 +119,8 @@
       font-size: 2.2rem;
       margin: 0;
       color: #1f4fff;
+      font-variant-numeric: tabular-nums;
+      display: inline-block;
     }
 
     .stat p {
@@ -217,26 +219,28 @@
 <script>
   const workerUrl = "https://oxford-response-stats.aayan-sb.workers.dev";
 
-  // Animate numbers from start to end
-  function animateValue(element, start, end, duration) {
-    start = start || 0;
-    end = end || 0;
-    const range = end - start;
-    const minTimer = 50;
-    const stepTime = Math.max(Math.floor(duration / Math.abs(range)), minTimer);
-    let startTime = null;
+  // Slot-machine style animation
+  function animateDigits(element, targetValue, duration = 800) {
+    const oldValue = parseInt(element.textContent.replace(/,/g,'')) || 0;
+    const newStr = targetValue.toString();
+    const oldStr = oldValue.toString().padStart(newStr.length, "0");
 
+    let startTime = null;
     function step(timestamp) {
       if (!startTime) startTime = timestamp;
-      const progress = timestamp - startTime;
-      let value = Math.floor(start + (range * (progress / duration)));
-      if ((range > 0 && value > end) || (range < 0 && value < end)) value = end;
-      element.textContent = value.toLocaleString();
-      if (value !== end) {
-        requestAnimationFrame(step);
-      }
-    }
+      const progress = Math.min((timestamp - startTime) / duration, 1);
 
+      let display = "";
+      for (let i = 0; i < newStr.length; i++) {
+        const startDigit = parseInt(oldStr[i]);
+        const endDigit = parseInt(newStr[i]);
+        const currentDigit = Math.floor(startDigit + (endDigit - startDigit) * progress);
+        display += currentDigit;
+      }
+      element.textContent = parseInt(display).toLocaleString();
+
+      if (progress < 1) requestAnimationFrame(step);
+    }
     requestAnimationFrame(step);
   }
 
@@ -253,9 +257,9 @@
         const favoritesEl = document.getElementById("favorites");
         const statusEl = document.getElementById("status");
 
-        animateValue(visitsEl, parseInt(visitsEl.textContent.replace(/,/g,'')) || 0, game.visits || 0, 1000);
-        animateValue(playingEl, parseInt(playingEl.textContent.replace(/,/g,'')) || 0, game.playing || 0, 1000);
-        animateValue(favoritesEl, parseInt(favoritesEl.textContent.replace(/,/g,'')) || 0, game.favoritedCount || 0, 1000);
+        animateDigits(visitsEl, game.visits || 0);
+        animateDigits(playingEl, game.playing || 0);
+        animateDigits(favoritesEl, game.favoritedCount || 0);
 
         // Dynamic Online/Offline status
         if (game.playing > 0) {
@@ -267,7 +271,6 @@
           statusEl.classList.add("offline");
           statusEl.classList.remove("online");
         }
-
       } else {
         ["visits","playing","favorites","status"].forEach(id => {
           const el = document.getElementById(id);
