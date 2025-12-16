@@ -1,304 +1,162 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Oxford Response</title>
   <link rel="icon" href="favicon.png" type="image/png">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    /* --- Smooth Scroll --- */
-    html {
-      scroll-behavior: smooth;
+    html { scroll-behavior: smooth; }
+    body { 
+      font-family: Arial, sans-serif; 
+      background-color: #ffffff; 
+      color: #1a1a1a; 
+      margin:0; 
+      line-height:1.6; 
+      opacity:0; 
+      transition: opacity 0.5s ease; 
     }
+    body.fade-in { opacity:1; }
 
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #ffffff;
-      color: #1a1a1a;
-      text-align: center;
-      margin: 0;
-      line-height: 1.6;
-      opacity: 0;
-      transition: opacity 0.5s ease;
-    }
-
-    body.fade-in {
-      opacity: 1;
-    }
-
-    /* --- Navbar --- */
     nav {
-      position: sticky;
-      top: 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 2rem;
-      z-index: 10;
-      background: #ffffff;
-      border-bottom: 1px solid #e6e6e6;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+      position: sticky; top:0; display:flex; justify-content:space-between; align-items:center;
+      padding:1rem 2rem; z-index:10; background:#ffffff; border-bottom:1px solid #e6e6e6;
+      box-shadow:0 8px 32px rgba(0,0,0,0.08);
     }
+    nav img { height:32px; }
+    nav a { color:#1a1a1a; margin-left:1.25rem; text-decoration:none; font-weight:500; cursor:pointer; transition:color 0.2s ease; }
+    nav a:hover { color:#1f4fff; }
 
-    nav img {
-      height: 32px;
-    }
-
-    nav a {
-      color: #1a1a1a;
-      margin-left: 1.25rem;
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.2s ease;
-      cursor: pointer;
-    }
-
-    nav a:hover {
-      color: #1f4fff;
-    }
-
-    /* --- Header --- */
     header {
-      padding: 5rem 1.5rem 4rem;
-      text-align: center;
-      background: #f5f7fb;
+      padding:5rem 1.5rem 4rem; text-align:center; background:#f5f7fb;
     }
+    header img { height:120px; margin-bottom:1rem; }
+    header p { max-width:720px; margin:0 auto; font-size:1.05rem; color:#444; }
 
-    header img {
-      height: 120px;
-      margin-bottom: 1rem;
-    }
+    section { max-width:1100px; margin:0 auto; padding:3.5rem 1.5rem; }
+    h2 { margin-bottom:2rem; }
+    .features { display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:2rem; }
+    .feature img { width:100%; border-radius:18px; box-shadow:0 12px 30px rgba(0,0,0,0.12); transition:transform 0.3s ease, box-shadow 0.3s ease; cursor:pointer; }
+    .feature img:hover { transform:scale(1.05); box-shadow:0 16px 40px rgba(0,0,0,0.18); }
 
-    header p {
-      max-width: 720px;
-      margin: 0 auto;
-      font-size: 1.05rem;
-      color: #444;
-    }
+    .card { background:#ffffff; border-radius:18px; padding:2rem; box-shadow:0 12px 30px rgba(0,0,0,0.08); }
+    .stats { display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:1.5rem; text-align:center; }
+    .stat h3 { font-size:2.2rem; margin:0; color:#1f4fff; font-variant-numeric:tabular-nums; display:inline-block; }
+    .stat p { margin:0.25rem 0 0; color:#555; }
+    .online { color:#28a745; }
+    .offline { color:#dc3545; }
 
-    /* --- Features Section --- */
-    section {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 3.5rem 1.5rem;
-    }
-
-    h2 {
-      margin-bottom: 2rem;
-    }
-
-    .features {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-    }
-
-    .feature img {
-      width: 100%;
-      border-radius: 18px;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.12);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      cursor: pointer;
-    }
-
-    .feature img:hover {
-      transform: scale(1.05);
-      box-shadow: 0 16px 40px rgba(0,0,0,0.18);
-    }
-
-    /* --- Stats Section --- */
-    .card {
-      background: #ffffff;
-      border-radius: 18px;
-      padding: 2rem;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.08);
-    }
-
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1.5rem;
-      text-align: center;
-    }
-
-    .stat h3 {
-      font-size: 2.2rem;
-      margin: 0;
-      color: #1f4fff;
-      font-variant-numeric: tabular-nums;
-      display: inline-block;
-    }
-
-    .stat p {
-      margin: 0.25rem 0 0;
-      color: #555;
-    }
-
-    .online { color: #28a745; }
-    .offline { color: #dc3545; }
-
-    /* --- Footer --- */
-    footer {
-      text-align: center;
-      padding: 2rem;
-      color: #777;
-      font-size: 0.9rem;
-      background: #f5f7fb;
-    }
+    footer { text-align:center; padding:2rem; color:#777; font-size:0.9rem; background:#f5f7fb; }
   </style>
 </head>
 <body>
+  <div id="top"></div>
 
-<div id="top"></div>
+  <nav>
+    <div><img src="logo.svg" alt="Oxford Response Logo"></div>
+    <div>
+      <a href="index.html">Home</a>
+      <a id="teams-link">Teams</a>
+      <a href="story.html">Story</a>
+      <a href="roleplay.html">Roleplay</a>
+      <a href="staff.html">Our Team</a>
+    </div>
+  </nav>
 
-<nav>
-  <div>
+  <header>
     <img src="logo.svg" alt="Oxford Response Logo">
-  </div>
-  <div>
-    <a href="index.html">Home</a>
-    <a id="teams-link">Teams</a>
-    <a href="story.html">Story</a>
-    <a href="roleplay.html">Roleplay</a>
-    <a href="staff.html">Our Team</a>
-  </div>
-</nav>
+    <p>
+      Enforce the law, challenge it or save lives — inside Oxford Response.<br><br>
+      Oxford Response is an Emergency Response roleplay experience based in Oxford,
+      England, UK. Become a police officer, medic or criminal — the choice is yours.
+    </p>
+  </header>
 
-<header>
-  <img src="logo.svg" alt="Oxford Response Logo">
-  <p>
-    Enforce the law, challenge it or save lives — inside Oxford Response.
-    <br><br>
-    Oxford Response is an Emergency Response roleplay experience based in Oxford,
-    England, UK. Become a police officer, medic or criminal — the choice is yours.
-  </p>
-</header>
-
-<section>
-  <h2>Choose Your Path</h2>
-  <div class="features">
-    <div class="feature"><img src="fight-crime.webp" alt="Fight crime"></div>
-    <div class="feature"><img src="save-lives.webp" alt="Save lives"></div>
-    <div class="feature"><img src="get-rich.webp" alt="Get rich"></div>
-  </div>
-</section>
-
-<section>
-  <h2>Live Game Statistics</h2>
-  <div class="card stats">
-    <div class="stat">
-      <h3 id="visits">—</h3>
-      <p>Visits</p>
+  <section>
+    <h2>Choose Your Path</h2>
+    <div class="features">
+      <div class="feature"><img src="fight-crime.webp" alt="Fight crime"></div>
+      <div class="feature"><img src="save-lives.webp" alt="Save lives"></div>
+      <div class="feature"><img src="get-rich.webp" alt="Get rich"></div>
     </div>
-    <div class="stat">
-      <h3 id="playing">—</h3>
-      <p>Players Online</p>
+  </section>
+
+  <section>
+    <h2>Live Game Statistics</h2>
+    <div class="card stats">
+      <div class="stat"><h3 id="visits">—</h3><p>Visits</p></div>
+      <div class="stat"><h3 id="playing">—</h3><p>Players Online</p></div>
+      <div class="stat"><h3 id="favorites">—</h3><p>Favorites</p></div>
+      <div class="stat"><h3 id="status">—</h3><p>Game Status</p></div>
     </div>
-    <div class="stat">
-      <h3 id="favorites">—</h3>
-      <p>Favorites</p>
-    </div>
-    <div class="stat">
-      <h3 id="status">—</h3>
-      <p>Game Status</p>
-    </div>
-  </div>
-</section>
+  </section>
 
-<footer>
-  Oxford Response · Roblox
-</footer>
+  <footer>Oxford Response · Roblox</footer>
 
-<script>
-  const workerUrl = "https://oxford-response-stats.aayan-sb.workers.dev";
+  <script>
+    // Fade in page
+    window.addEventListener('DOMContentLoaded', () => document.body.classList.add('fade-in'));
 
-  // Fade in page
-  window.addEventListener('DOMContentLoaded', () => {
-    document.body.classList.add('fade-in');
-  });
+    // Navbar fade-out and smooth scroll
+    const links = document.querySelectorAll('nav a');
+    links.forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        const href = link.getAttribute('href');
 
-  // Fade out and smooth scroll
-  const links = document.querySelectorAll('nav a');
-  links.forEach(link => {
-    link.addEventListener('click', e => {
-      e.preventDefault();
-      const href = link.getAttribute('href');
-
-      if(link.id === 'teams-link') {
-        document.getElementById('top').scrollIntoView({ behavior: 'smooth' });
-      }
-
-      document.body.classList.remove('fade-in');
-      document.body.style.opacity = 0;
-
-      setTimeout(() => {
-        if(link.id !== 'teams-link') window.location.href = href;
-      }, 400);
-    });
-  });
-
-  // Slot-machine animation for stats
-  function animateDigits(element, targetValue, duration = 800) {
-    const oldValue = parseInt(element.textContent.replace(/,/g,'')) || 0;
-    const newStr = targetValue.toString();
-    const oldStr = oldValue.toString().padStart(newStr.length, "0");
-
-    let startTime = null;
-    function step(timestamp) {
-      if (!startTime) startTime = timestamp;
-      const progress = Math.min((timestamp - startTime) / duration, 1);
-      let display = "";
-      for (let i = 0; i < newStr.length; i++) {
-        const startDigit = parseInt(oldStr[i]);
-        const endDigit = parseInt(newStr[i]);
-        const currentDigit = Math.floor(startDigit + (endDigit - startDigit) * progress);
-        display += currentDigit;
-      }
-      element.textContent = parseInt(display).toLocaleString();
-      if (progress < 1) requestAnimationFrame(step);
-    }
-    requestAnimationFrame(step);
-  }
-
-  async function updateStats() {
-    try {
-      const res = await fetch(workerUrl);
-      const data = await res.json();
-
-      if (data && data.data && data.data.length > 0) {
-        const game = data.data[0];
-        animateDigits(document.getElementById("visits"), game.visits || 0);
-        animateDigits(document.getElementById("playing"), game.playing || 0);
-        animateDigits(document.getElementById("favorites"), game.favoritedCount || 0);
-
-        const statusEl = document.getElementById("status");
-        if(game.playing > 0) {
-          statusEl.textContent = "Online";
-          statusEl.classList.add("online");
-          statusEl.classList.remove("offline");
-        } else {
-          statusEl.textContent = "Offline";
-          statusEl.classList.add("offline");
-          statusEl.classList.remove("online");
+        // Teams button scroll to top
+        if(link.id==='teams-link' && window.location.pathname.endsWith('teams.html')===false){
+          document.getElementById('top').scrollIntoView({behavior:'smooth'});
         }
-      } else {
-        ["visits","playing","favorites","status"].forEach(id => {
-          const el = document.getElementById(id);
-          if(el) el.textContent = "N/A";
-        });
-      }
-    } catch (err) {
-      console.error("Failed to fetch stats:", err);
-      ["visits","playing","favorites","status"].forEach(id => {
-        const el = document.getElementById(id);
-        if(el) el.textContent = "N/A";
+
+        if(link.id==='teams-link' && window.location.pathname.endsWith('teams.html')){
+          document.getElementById('top').scrollIntoView({behavior:'smooth'});
+          return;
+        }
+
+        document.body.classList.remove('fade-in');
+        document.body.style.opacity = 0;
+
+        setTimeout(()=>{ if(!(link.id==='teams-link' && window.location.pathname.endsWith('teams.html'))) window.location.href=href; },400);
       });
+    });
+
+    // Animate stats
+    function animateDigits(el,val,duration=800){
+      const oldVal=parseInt(el.textContent.replace(/,/g,''))||0;
+      const newStr=val.toString();
+      const oldStr=oldVal.toString().padStart(newStr.length,'0');
+      let startTime=null;
+      function step(timestamp){
+        if(!startTime) startTime=timestamp;
+        const progress=Math.min((timestamp-startTime)/duration,1);
+        let display='';
+        for(let i=0;i<newStr.length;i++){
+          const s=parseInt(oldStr[i]), e=parseInt(newStr[i]);
+          const c=Math.floor(s+(e-s)*progress); display+=c;
+        }
+        el.textContent=parseInt(display).toLocaleString();
+        if(progress<1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
     }
-  }
 
-  updateStats();
-  setInterval(updateStats, 15000);
-</script>
-
+    async function updateStats(){
+      try{
+        const res=await fetch("https://oxford-response-stats.aayan-sb.workers.dev");
+        const data=await res.json();
+        if(data && data.data && data.data.length>0){
+          const g=data.data[0];
+          animateDigits(document.getElementById("visits"), g.visits||0);
+          animateDigits(document.getElementById("playing"), g.playing||0);
+          animateDigits(document.getElementById("favorites"), g.favoritedCount||0);
+          const s=document.getElementById("status");
+          if(g.playing>0){ s.textContent="Online"; s.classList.add("online"); s.classList.remove("offline"); }
+          else{ s.textContent="Offline"; s.classList.add("offline"); s.classList.remove("online"); }
+        } else { ["visits","playing","favorites","status"].forEach(id=>document.getElementById(id).textContent="N/A"); }
+      }catch(e){ ["visits","playing","favorites","status"].forEach(id=>document.getElementById(id).textContent="N/A"); }
+    }
+    updateStats(); setInterval(updateStats,15000);
+  </script>
 </body>
 </html>
