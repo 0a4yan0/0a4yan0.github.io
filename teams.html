@@ -6,7 +6,7 @@
   <link rel="icon" href="favicon.png" type="image/png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Lucide Icons (Thin Style) -->
+  <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
   <style>
@@ -44,7 +44,7 @@
       padding: 3rem 1.5rem 1rem;
     }
 
-    /* Oxford Response logo above Choose Your Team */
+    /* Logo above choose your team */
     .small-logo {
       height: 70px;
       margin: 0 auto 1.5rem;
@@ -66,29 +66,24 @@
     }
 
     .team-card {
-      background: #ffffff;
+      background: #1f4fff;
       border-radius: 16px;
-      padding: 1.5rem;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+      padding: 2.2rem 1.5rem;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.15);
       transition: transform 0.25s ease, box-shadow 0.25s ease;
       cursor: pointer;
+      color: white;
     }
     .team-card:hover {
       transform: translateY(-4px);
-      box-shadow: 0 16px 40px rgba(0,0,0,0.12);
-    }
-
-    .team-img {
-      width: 100%;
-      border-radius: 14px;
-      margin-bottom: 1rem;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.22);
     }
 
     .team-icon {
-      width: 28px;
-      height: 28px;
-      margin-bottom: 0.5rem;
-      color: #1f4fff;
+      width: 64px;
+      height: 64px;
+      margin-bottom: 1rem;
+      color: white;
     }
 
     footer {
@@ -123,28 +118,24 @@
       <!-- CIVILIAN -->
       <div class="team-card">
         <i data-lucide="user-round" class="team-icon"></i>
-        <img src="civilian.png" class="team-img" alt="Civilian">
         <h3>Civilian</h3>
       </div>
 
       <!-- POLICE -->
       <div class="team-card">
         <i data-lucide="shield" class="team-icon"></i>
-        <img src="police.png" class="team-img" alt="Police">
         <h3>Police</h3>
       </div>
 
       <!-- NHS -->
       <div class="team-card">
         <i data-lucide="cross" class="team-icon"></i>
-        <img src="nhs.png" class="team-img" alt="NHS">
         <h3>NHS</h3>
       </div>
 
       <!-- NATIONAL HIGHWAYS -->
       <div class="team-card">
         <i data-lucide="traffic-cone" class="team-icon"></i>
-        <img src="highways.png" class="team-img" alt="Highways">
         <h3>National Highways</h3>
       </div>
 
@@ -156,10 +147,9 @@
   </footer>
 
   <script>
-    // Animate fade-in
     window.addEventListener("DOMContentLoaded", () => {
       document.body.classList.add("fade-in");
-      lucide.createIcons(); // load icons
+      lucide.createIcons();
     });
   </script>
 
