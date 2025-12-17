@@ -6,15 +6,15 @@
   <link rel="icon" href="favicon.png" type="image/png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Lucide Icons -->
-  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Lucide Icons with defer -->
+  <script src="https://unpkg.com/lucide@latest" defer></script>
 
   <style>
     html { scroll-behavior: smooth; }
 
     body {
       font-family: Arial, sans-serif;
-      background: #ffffff;
+      background: #fff;
       color: #1a1a1a;
       margin: 0;
       text-align: center;
@@ -30,7 +30,7 @@
       justify-content: space-between;
       align-items: center;
       padding: 1rem 2rem;
-      background: #ffffff;
+      background: #fff;
       border-bottom: 1px solid #e6e6e6;
       box-shadow: 0 8px 32px rgba(0,0,0,0.07);
       z-index: 10;
@@ -48,12 +48,7 @@
       padding: 3rem 1.5rem 1rem;
     }
 
-    .small-logo {
-      height: 70px;
-      margin: 0 auto 1.5rem;
-      display: block;
-    }
-
+    .small-logo { height: 70px; margin: 0 auto 1.5rem; display: block; }
     h2 { margin-bottom: 1rem; }
 
     .subheading {
@@ -80,12 +75,8 @@
       grid-template-columns: repeat(4, 1fr);
       gap: 2rem;
     }
-    @media (max-width: 1024px) {
-      .team-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (max-width: 600px) {
-      .team-grid { grid-template-columns: 1fr; }
-    }
+    @media (max-width: 1024px) { .team-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px) { .team-grid { grid-template-columns: 1fr; } }
 
     .team-card {
       background: #333;
@@ -99,7 +90,6 @@
       flex-direction: column;
       align-items: center;
     }
-
     .team-card.civilian:hover { background: gray; }
     .team-card.police:hover { background: #1f4fff; }
     .team-card.nhs:hover { background: #28a745; }
@@ -113,12 +103,7 @@
       color: #f0f0f0;
     }
 
-    .team-icon {
-      width: 64px;
-      height: 64px;
-      margin-bottom: 1rem;
-      color: white;
-    }
+    .team-icon { width: 64px; height: 64px; margin-bottom: 1rem; color: white; }
 
     footer {
       text-align: center;
@@ -184,7 +169,7 @@
   <script>
     window.addEventListener("DOMContentLoaded", () => {
       document.body.classList.add("fade-in");
-      if (lucide && typeof lucide.createIcons === 'function') {
+      if (window.lucide && typeof lucide.createIcons === 'function') {
         lucide.createIcons();
       }
     });
