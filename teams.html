@@ -56,7 +56,6 @@
 
     h2 { margin-bottom: 1rem; }
 
-    /* Subheading styling */
     .subheading {
       margin-top: 1rem;
       font-size: 1rem;
@@ -76,10 +75,9 @@
       padding: 3rem 1.5rem;
     }
 
-    /* Grid */
     .team-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr); /* force 4 columns */
+      grid-template-columns: repeat(4, 1fr);
       gap: 2rem;
     }
     @media (max-width: 1024px) {
@@ -89,9 +87,8 @@
       .team-grid { grid-template-columns: 1fr; }
     }
 
-    /* Team cards */
     .team-card {
-      background: #333; /* default dark gray */
+      background: #333;
       border-radius: 16px;
       padding: 2.2rem 1.5rem;
       box-shadow: 0 12px 30px rgba(0,0,0,0.15);
@@ -103,13 +100,11 @@
       align-items: center;
     }
 
-    /* Hover colors */
     .team-card.civilian:hover { background: gray; }
     .team-card.police:hover { background: #1f4fff; }
     .team-card.nhs:hover { background: #28a745; }
     .team-card.highways:hover { background: orange; }
 
-    /* Description text */
     .team-card p {
       margin-top: 0.5rem;
       font-size: 0.9rem;
@@ -128,4 +123,71 @@
     footer {
       text-align: center;
       padding: 2rem;
-      backgr
+      background: #f5f7fb;
+      margin-top: 3rem;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div><img src="logo.svg" alt="Oxford Response Logo"></div>
+    <div>
+      <a href="index.html">Home</a>
+      <a href="teams.html">Teams</a>
+      <a href="story.html">Story</a>
+      <a href="roleplay.html">Roleplay</a>
+      <a href="staff.html">Our Team</a>
+    </div>
+  </nav>
+
+  <header>
+    <img src="logo.svg" class="small-logo" alt="Oxford Response">
+    <h2>Choose Your Team</h2>
+    <p class="subheading">
+      Serve the public, protect the streets, save lives, or keep the roads moving.<br>
+      Each team offers a unique roleplay experience in Oxford Response.
+    </p>
+  </header>
+
+  <section class="teams-container">
+    <div class="team-grid">
+      <div class="team-card civilian">
+        <i data-lucide="user-round" class="team-icon"></i>
+        <h3>Civilian</h3>
+        <p>Live a normal life, run businesses, or blend into the city.</p>
+      </div>
+
+      <div class="team-card police">
+        <i data-lucide="shield" class="team-icon"></i>
+        <h3>Police</h3>
+        <p>Respond to incidents, enforce the law, and keep Oxford safe.</p>
+      </div>
+
+      <div class="team-card nhs">
+        <i data-lucide="cross" class="team-icon"></i>
+        <h3>NHS</h3>
+        <p>Save lives and provide medical assistance in emergencies.</p>
+      </div>
+
+      <div class="team-card highways">
+        <i data-lucide="traffic-cone" class="team-icon"></i>
+        <h3>National Highways</h3>
+        <p>Manage traffic, maintain roads, and respond to major incidents.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    Oxford Response · Roblox
+  </footer>
+
+  <script>
+    window.addEventListener("DOMContentLoaded", () => {
+      document.body.classList.add("fade-in");
+      if (lucide && typeof lucide.createIcons === 'function') {
+        lucide.createIcons();
+      }
+    });
+  </script>
+</body>
+</html>
