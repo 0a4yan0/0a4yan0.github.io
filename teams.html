@@ -5,40 +5,143 @@
   <title>Teams · Oxford Response</title>
   <link rel="icon" href="favicon.png" type="image/png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <style>
-    html{scroll-behavior:smooth;}
-    body{margin:0;font-family:Arial,sans-serif;background:#fff;color:#1a1a1a;line-height:1.6;opacity:0;transition:opacity 0.5s ease;}
-    body.fade-in{opacity:1;}
+    html { scroll-behavior: smooth; }
 
-    nav{position:sticky;top:0;background:#fff;border-bottom:1px solid #e6e6e6;padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;z-index:10;}
-    nav img{height:32px;}
-    nav a{color:#1a1a1a;margin-left:1.25rem;text-decoration:none;font-weight:500;cursor:pointer;}
-    nav a:hover{color:#1f4fff;}
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #ffffff;
+      color: #1a1a1a;
+      line-height: 1.6;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
 
-    header{padding:4rem 1.5rem 3rem;text-align:center;background:#f5f7fb;}
-    header h1{margin-bottom:0.5rem;font-size:2.5rem;}
-    header p{max-width:720px;margin:0 auto;color:#444;}
+    body.fade-in {
+      opacity: 1;
+    }
 
-    section{max-width:1200px;margin:0 auto;padding:4rem 1.5rem;}
-    .teams{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2rem;}
-    .team-card{background:#1e1e1e;color:#fff;border-radius:18px;overflow:hidden;box-shadow:0 12px 30px rgba(0,0,0,0.15);transition:background 0.35s ease, transform 0.35s ease;cursor:pointer;}
-    .team-card:hover{transform:translateY(-6px);}
-    .team-card img{width:100%;height:260px;object-fit:cover;display:block;}
-    .team-info{padding:1.25rem;}
-    .team-info h3{margin:0 0 0.4rem;font-size:1.3rem;}
-    .team-info p{margin:0;font-size:0.95rem;opacity:0.9;}
-    .civilian:hover{background:#6e6e6e;}
-    .police:hover{background:#1f4fff;}
-    .nhs:hover{background:#1b8f4b;}
-    .highways:hover{background:#e67e22;}
-    footer{text-align:center;padding:2rem;color:#777;font-size:0.9rem;background:#f5f7fb;}
+    /* --- Navbar --- */
+    nav {
+      position: sticky;
+      top: 0;
+      background: #ffffff;
+      border-bottom: 1px solid #e6e6e6;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 10;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+    }
+
+    nav img {
+      height: 32px;
+    }
+
+    nav a {
+      color: #1a1a1a;
+      margin-left: 1.25rem;
+      text-decoration: none;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    nav a:hover {
+      color: #1f4fff;
+    }
+
+    /* --- Header --- */
+    header {
+      padding: 4rem 1.5rem 3rem;
+      text-align: center;
+      background: #f5f7fb;
+    }
+
+    header h1 {
+      margin-bottom: 0.5rem;
+      font-size: 2.5rem;
+    }
+
+    header p {
+      max-width: 720px;
+      margin: 0 auto;
+      color: #444;
+    }
+
+    /* --- Teams Section --- */
+    section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem;
+    }
+
+    .teams {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2rem;
+    }
+
+    .team-card {
+      background: #1e1e1e;
+      color: #ffffff;
+      border-radius: 18px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      transition: transform 0.35s ease, background 0.35s ease;
+      cursor: pointer;
+    }
+
+    .team-card:hover {
+      transform: translateY(-6px);
+    }
+
+    /* --- PNG Logo Styling --- */
+    .team-card img {
+      width: 140px;
+      height: 140px;
+      object-fit: contain;       /* IMPORTANT for PNGs */
+      margin-bottom: 1.25rem;
+      pointer-events: none;
+    }
+
+    .team-info h3 {
+      margin: 0 0 0.4rem;
+      font-size: 1.3rem;
+    }
+
+    .team-info p {
+      margin: 0;
+      font-size: 0.95rem;
+      opacity: 0.9;
+    }
+
+    /* --- Team Hover Colours --- */
+    .civilian:hover { background: #6e6e6e; }
+    .police:hover { background: #1f4fff; }
+    .nhs:hover { background: #1b8f4b; }
+    .highways:hover { background: #e67e22; }
+
+    /* --- Footer --- */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: #777;
+      font-size: 0.9rem;
+      background: #f5f7fb;
+    }
   </style>
 </head>
 <body>
   <div id="top"></div>
 
   <nav>
-    <div><img src="logo.svg" alt="Oxford Response Logo"></div>
+    <div>
+      <img src="logo.svg" alt="Oxford Response Logo">
+    </div>
     <div>
       <a href="index.html">Home</a>
       <a href="teams.html">Teams</a>
@@ -50,38 +153,76 @@
 
   <header>
     <h1>Choose Your Team</h1>
-    <p>Serve the public, protect the streets, save lives, or keep the roads moving. Each team offers a unique roleplay experience in Oxford Response.</p>
+    <p>
+      Serve the public, protect the streets, save lives, or keep the roads moving.
+      Each team offers a unique roleplay experience in Oxford Response.
+    </p>
   </header>
 
   <section>
     <div class="teams">
-      <div class="team-card civilian"><img src="civilian.webp" alt="Civilian"><div class="team-info"><h3>Civilian</h3><p>Live a normal life, run businesses, or blend into the city.</p></div></div>
-      <div class="team-card police"><img src="police.webp" alt="Police"><div class="team-info"><h3>Police</h3><p>Respond to incidents, enforce the law, and keep Oxford safe.</p></div></div>
-      <div class="team-card nhs"><img src="nhs.webp" alt="NHS"><div class="team-info"><h3>NHS</h3><p>Save lives and provide medical assistance in emergencies.</p></div></div>
-      <div class="team-card highways"><img src="highways.webp" alt="Highways"><div class="team-info"><h3>Highways</h3><p>Manage traffic, maintain roads, and ensure smooth transportation.</p></div></div>
+
+      <div class="team-card civilian">
+        <img src="civilian.png" alt="Civilian Team Logo">
+        <div class="team-info">
+          <h3>Civilian</h3>
+          <p>Live a normal life, run businesses, or blend into the city.</p>
+        </div>
+      </div>
+
+      <div class="team-card police">
+        <img src="police.png" alt="Police Team Logo">
+        <div class="team-info">
+          <h3>Police</h3>
+          <p>Respond to incidents, enforce the law, and keep Oxford safe.</p>
+        </div>
+      </div>
+
+      <div class="team-card nhs">
+        <img src="nhs.png" alt="NHS Team Logo">
+        <div class="team-info">
+          <h3>NHS</h3>
+          <p>Save lives and provide medical assistance in emergencies.</p>
+        </div>
+      </div>
+
+      <div class="team-card highways">
+        <img src="highways.png" alt="National Highways Team Logo">
+        <div class="team-info">
+          <h3>National Highways</h3>
+          <p>Manage traffic, maintain roads, and respond to major incidents.</p>
+        </div>
+      </div>
+
     </div>
   </section>
 
-  <footer>Oxford Response · Roblox</footer>
+  <footer>
+    Oxford Response · Roblox
+  </footer>
 
   <script>
-    window.addEventListener('DOMContentLoaded',()=>document.body.classList.add('fade-in'));
+    // Fade-in on page load
+    window.addEventListener('DOMContentLoaded', () => {
+      document.body.classList.add('fade-in');
+    });
 
-    const links = document.querySelectorAll('nav a');
-    links.forEach(link => {
-      link.addEventListener('click', function(e){
-        const href = this.getAttribute('href');
+    // Fade-out on navigation
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', e => {
+        const href = link.getAttribute('href');
 
-        // Scroll to top if same-page anchor
-        if(href === "#top"){
+        if (href.startsWith('#')) {
           e.preventDefault();
-          document.querySelector(href).scrollIntoView({behavior:'smooth'});
+          document.querySelector(href).scrollIntoView({ behavior: 'smooth' });
           return;
         }
 
         e.preventDefault();
         document.body.style.opacity = 0;
-        setTimeout(()=>window.location.href=href,400);
+        setTimeout(() => {
+          window.location.href = href;
+        }, 400);
       });
     });
   </script>
