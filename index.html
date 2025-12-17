@@ -93,44 +93,42 @@
   <footer>Oxford Response · Roblox</footer>
 
   <script>
-    // Fade-in page on load
-    window.addEventListener('DOMContentLoaded', () => document.body.classList.add('fade-in'));
+    // Fade-in on page load
+    window.addEventListener('DOMContentLoaded', ()=>document.body.classList.add('fade-in'));
 
-    // Handle fade-out on nav links
+    // Fade-out on nav click
     const navLinks = document.querySelectorAll('nav a');
     navLinks.forEach(link => {
       link.addEventListener('click', function(e){
         const href = this.getAttribute('href');
 
-        // For in-page scroll to top
+        // Same-page anchor (#top)
         if(href.startsWith('#')){
           e.preventDefault();
-          const target = document.querySelector(href);
-          if(target){
-            target.scrollIntoView({behavior:'smooth'});
-          }
+          document.querySelector(href).scrollIntoView({behavior:'smooth'});
           return;
         }
 
+        // Different page
         e.preventDefault();
         document.body.style.opacity = 0;
-        setTimeout(() => { window.location.href = href; }, 400);
+        setTimeout(()=>window.location.href=href, 400);
       });
     });
 
-    // Fetch and display Roblox game stats
+    // Fetch Roblox stats
     async function updateStats(){
       try{
-        const res=await fetch("https://oxford-response-stats.aayan-sb.workers.dev");
-        const data=await res.json();
+        const res = await fetch("https://oxford-response-stats.aayan-sb.workers.dev");
+        const data = await res.json();
         if(data && data.data && data.data.length>0){
-          const g=data.data[0];
-          document.getElementById("visits").textContent=g.visits.toLocaleString();
-          document.getElementById("playing").textContent=g.playing.toLocaleString();
-          document.getElementById("favorites").textContent=g.favoritedCount.toLocaleString();
-          const s=document.getElementById("status");
-          if(g.playing>0){ s.textContent="Online"; s.className="online"; } 
-          else{ s.textContent="Offline"; s.className="offline"; }
+          const g = data.data[0];
+          document.getElementById("visits").textContent = g.visits.toLocaleString();
+          document.getElementById("playing").textContent = g.playing.toLocaleString();
+          document.getElementById("favorites").textContent = g.favoritedCount.toLocaleString();
+          const s = document.getElementById("status");
+          s.textContent = g.playing>0 ? "Online" : "Offline";
+          s.className = g.playing>0 ? "online" : "offline";
         } else {
           ["visits","playing","favorites","status"].forEach(id=>document.getElementById(id).textContent="N/A");
         }
