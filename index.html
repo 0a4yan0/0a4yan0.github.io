@@ -7,8 +7,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
-    html { scroll-behavior: smooth; }
-
     body { 
       font-family: Arial, sans-serif; 
       background-color: #ffffff; 
@@ -16,11 +14,7 @@
       text-align: center; 
       margin: 0; 
       line-height: 1.6; 
-      opacity: 0; 
-      transition: opacity 0.5s ease;
     }
-
-    body.fade-in { opacity: 1; }
 
     nav {
       position: sticky;
@@ -116,10 +110,11 @@
     .offline { color: #dc3545; }
 
     footer {
+      text-align: center;
       padding: 2rem;
-      color: #777;
-      font-size: 0.9rem;
       background: #f5f7fb;
+      color: #1a1a1a;
+      font-size: 0.9rem;
     }
   </style>
 </head>
@@ -150,9 +145,9 @@
   <section>
     <h2>Choose Your Path</h2>
     <div class="features">
-      <div class="feature"><img src="fight-crime.webp"></div>
-      <div class="feature"><img src="save-lives.webp"></div>
-      <div class="feature"><img src="get-rich.webp"></div>
+      <div class="feature"><img src="fight-crime.webp" alt="Fight Crime"></div>
+      <div class="feature"><img src="save-lives.webp" alt="Save Lives"></div>
+      <div class="feature"><img src="get-rich.webp" alt="Get Rich"></div>
     </div>
   </section>
 
@@ -169,28 +164,6 @@
   <footer>Oxford Response · Roblox</footer>
 
   <script>
-    // Fade-in
-    window.addEventListener('DOMContentLoaded', () => {
-      document.body.classList.add('fade-in');
-    });
-
-    // Navigation
-    document.querySelectorAll('nav a').forEach(link => {
-      link.addEventListener('click', e => {
-        const href = link.getAttribute('href');
-
-        if (href.startsWith('#')) {
-          e.preventDefault();
-          document.querySelector(href).scrollIntoView({ behavior: 'smooth' });
-          return;
-        }
-
-        e.preventDefault();
-        document.body.style.opacity = 0;
-        setTimeout(() => window.location.href = href, 400);
-      });
-    });
-
     // Robust stats fetch
     async function updateStats() {
       try {
