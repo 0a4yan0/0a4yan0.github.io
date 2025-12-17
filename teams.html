@@ -2,153 +2,107 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Teams · Oxford Response</title>
+  <title>Oxford Response — Teams</title>
   <link rel="icon" href="favicon.png" type="image/png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <!-- Lucide Icons (Thin Style) -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
   <style>
     html { scroll-behavior: smooth; }
-
     body {
-      margin: 0;
       font-family: Arial, sans-serif;
       background: #ffffff;
       color: #1a1a1a;
-      line-height: 1.6;
+      margin: 0;
+      text-align: center;
       opacity: 0;
       transition: opacity 0.5s ease;
     }
+    body.fade-in { opacity: 1; }
 
-    body.fade-in {
-      opacity: 1;
-    }
-
-    /* --- Navbar --- */
     nav {
-      position: sticky;
-      top: 0;
+      position: sticky; top: 0;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1rem 2rem;
       background: #ffffff;
       border-bottom: 1px solid #e6e6e6;
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.07);
       z-index: 10;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.08);
     }
-
-    nav img {
-      height: 32px;
-    }
-
+    nav img { height: 32px; }
     nav a {
       color: #1a1a1a;
-      margin-left: 1.25rem;
+      margin-left: 1.2rem;
       text-decoration: none;
       font-weight: 500;
-      cursor: pointer;
     }
+    nav a:hover { color: #1f4fff; }
 
-    nav a:hover {
-      color: #1f4fff;
-    }
-
-    /* --- Header --- */
     header {
-      padding: 4rem 1.5rem 3rem;
-      text-align: center;
-      background: #f5f7fb;
+      padding: 3rem 1.5rem 1rem;
     }
 
-    .header-logo {
-      height: 72px;
-      margin-bottom: 1.25rem;
-      opacity: 0.95;
+    /* Oxford Response logo above Choose Your Team */
+    .small-logo {
+      height: 70px;
+      margin: 0 auto 1.5rem;
+      display: block;
     }
 
-    header h1 {
-      margin-bottom: 0.5rem;
-      font-size: 2.5rem;
-    }
-
-    header p {
-      max-width: 720px;
+    .teams-container {
+      max-width: 1100px;
       margin: 0 auto;
-      color: #444;
+      padding: 3rem 1.5rem;
     }
 
-    /* --- Teams Section --- */
-    section {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 4rem 1.5rem;
-    }
+    h2 { margin-bottom: 2rem; }
 
-    .teams {
+    .team-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 2rem;
     }
 
     .team-card {
-      background: #1e1e1e;
-      color: #ffffff;
-      border-radius: 18px;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.15);
-      padding: 2rem 1.5rem;
-      text-align: center;
-      transition: transform 0.35s ease, background 0.35s ease;
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 1.5rem;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
       cursor: pointer;
     }
-
     .team-card:hover {
-      transform: translateY(-6px);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.12);
     }
 
-    /* --- PNG Logo Styling --- */
-    .team-card img {
-      width: 140px;
-      height: 140px;
-      object-fit: contain;
-      margin-bottom: 1.25rem;
-      pointer-events: none;
+    .team-img {
+      width: 100%;
+      border-radius: 14px;
+      margin-bottom: 1rem;
     }
 
-    .team-info h3 {
-      margin: 0 0 0.4rem;
-      font-size: 1.3rem;
+    .team-icon {
+      width: 28px;
+      height: 28px;
+      margin-bottom: 0.5rem;
+      color: #1f4fff;
     }
 
-    .team-info p {
-      margin: 0;
-      font-size: 0.95rem;
-      opacity: 0.9;
-    }
-
-    /* --- Team Hover Colours --- */
-    .civilian:hover { background: #6e6e6e; }
-    .police:hover { background: #1f4fff; }
-    .nhs:hover { background: #1b8f4b; }
-    .highways:hover { background: #e67e22; }
-
-    /* --- Footer --- */
     footer {
       text-align: center;
       padding: 2rem;
-      color: #777;
-      font-size: 0.9rem;
       background: #f5f7fb;
+      margin-top: 3rem;
     }
   </style>
+
 </head>
-
 <body>
-  <div id="top"></div>
-
   <nav>
-    <div>
-      <img src="logo.svg" alt="Oxford Response Logo">
-    </div>
+    <div><img src="logo.svg" alt="Oxford Response Logo"></div>
     <div>
       <a href="index.html">Home</a>
       <a href="teams.html">Teams</a>
@@ -159,47 +113,39 @@
   </nav>
 
   <header>
-    <img src="logo.svg" alt="Oxford Response Logo" class="header-logo">
-    <h1>Choose Your Team</h1>
-    <p>
-      Serve the public, protect the streets, save lives, or keep the roads moving.
-      Each team offers a unique roleplay experience in Oxford Response.
-    </p>
+    <img src="logo.svg" class="small-logo" alt="Oxford Response">
+    <h2>Choose Your Team</h2>
   </header>
 
-  <section>
-    <div class="teams">
+  <section class="teams-container">
+    <div class="team-grid">
 
-      <div class="team-card civilian">
-        <img src="civilian2.png" alt="Civilian Team Logo">
-        <div class="team-info">
-          <h3>Civilian</h3>
-          <p>Live a normal life, run businesses, or blend into the city.</p>
-        </div>
+      <!-- CIVILIAN -->
+      <div class="team-card">
+        <i data-lucide="user-round" class="team-icon"></i>
+        <img src="civilian.png" class="team-img" alt="Civilian">
+        <h3>Civilian</h3>
       </div>
 
-      <div class="team-card police">
-        <img src="police2.png" alt="Police Team Logo">
-        <div class="team-info">
-          <h3>Police</h3>
-          <p>Respond to incidents, enforce the law, and keep Oxford safe.</p>
-        </div>
+      <!-- POLICE -->
+      <div class="team-card">
+        <i data-lucide="shield" class="team-icon"></i>
+        <img src="police.png" class="team-img" alt="Police">
+        <h3>Police</h3>
       </div>
 
-      <div class="team-card nhs">
-        <img src="nhs2.png" alt="NHS Team Logo">
-        <div class="team-info">
-          <h3>NHS</h3>
-          <p>Save lives and provide medical assistance in emergencies.</p>
-        </div>
+      <!-- NHS -->
+      <div class="team-card">
+        <i data-lucide="cross" class="team-icon"></i>
+        <img src="nhs.png" class="team-img" alt="NHS">
+        <h3>NHS</h3>
       </div>
 
-      <div class="team-card highways">
-        <img src="highways.png" alt="National Highways Team Logo">
-        <div class="team-info">
-          <h3>National Highways</h3>
-          <p>Manage traffic, maintain roads, and respond to major incidents.</p>
-        </div>
+      <!-- NATIONAL HIGHWAYS -->
+      <div class="team-card">
+        <i data-lucide="traffic-cone" class="team-icon"></i>
+        <img src="highways.png" class="team-img" alt="Highways">
+        <h3>National Highways</h3>
       </div>
 
     </div>
@@ -210,38 +156,12 @@
   </footer>
 
   <script>
-    // Fade-in on page load
-    window.addEventListener('DOMContentLoaded', () => {
-      document.body.classList.add('fade-in');
-    });
-
-    // Navigation + scroll handling
-    document.querySelectorAll('nav a').forEach(link => {
-      link.addEventListener('click', e => {
-        const href = link.getAttribute('href');
-
-        // Clicking current page = scroll to top
-        if (href === 'teams.html' && window.location.pathname.endsWith('teams.html')) {
-          e.preventDefault();
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-          return;
-        }
-
-        // In-page anchors
-        if (href.startsWith('#')) {
-          e.preventDefault();
-          document.querySelector(href).scrollIntoView({ behavior: 'smooth' });
-          return;
-        }
-
-        // Page navigation with fade
-        e.preventDefault();
-        document.body.style.opacity = 0;
-        setTimeout(() => {
-          window.location.href = href;
-        }, 400);
-      });
+    // Animate fade-in
+    window.addEventListener("DOMContentLoaded", () => {
+      document.body.classList.add("fade-in");
+      lucide.createIcons(); // load icons
     });
   </script>
+
 </body>
 </html>
