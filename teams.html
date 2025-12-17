@@ -6,11 +6,9 @@
   <link rel="icon" href="favicon.png" type="image/png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Lucide Icons with defer -->
   <script src="https://unpkg.com/lucide@latest" defer></script>
 
   <style>
-    /* Smooth scroll for internal anchors */
     html { scroll-behavior: smooth; }
 
     body {
@@ -20,7 +18,7 @@
       margin: 0;
       text-align: center;
       opacity: 0;
-      transition: opacity 1s ease; /* longer for smoother fade */
+      transition: opacity 1s ease;
     }
     body.fade-in { opacity: 1; }
 
@@ -114,71 +112,3 @@
     }
   </style>
 </head>
-<body>
-  <nav>
-    <div><img src="logo.svg" alt="Oxford Response Logo"></div>
-    <div>
-      <a href="#home">Home</a>
-      <a href="#teams">Teams</a>
-      <a href="#story">Story</a>
-      <a href="#roleplay">Roleplay</a>
-      <a href="#staff">Our Team</a>
-    </div>
-  </nav>
-
-  <header id="teams">
-    <img src="logo.svg" class="small-logo" alt="Oxford Response">
-    <h2>Choose Your Team</h2>
-    <p class="subheading">
-      Serve the public, protect the streets, save lives, or keep the roads moving.<br>
-      Each team offers a unique roleplay experience in Oxford Response.
-    </p>
-  </header>
-
-  <section class="teams-container">
-    <div class="team-grid">
-      <div class="team-card civilian">
-        <i data-lucide="user-round" class="team-icon"></i>
-        <h3>Civilian</h3>
-        <p>Live a normal life, run businesses, or blend into the city.</p>
-      </div>
-
-      <div class="team-card police">
-        <i data-lucide="shield" class="team-icon"></i>
-        <h3>Police</h3>
-        <p>Respond to incidents, enforce the law, and keep Oxford safe.</p>
-      </div>
-
-      <div class="team-card nhs">
-        <i data-lucide="cross" class="team-icon"></i>
-        <h3>NHS</h3>
-        <p>Save lives and provide medical assistance in emergencies.</p>
-      </div>
-
-      <div class="team-card highways">
-        <i data-lucide="traffic-cone" class="team-icon"></i>
-        <h3>National Highways</h3>
-        <p>Manage traffic, maintain roads, and respond to major incidents.</p>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    Oxford Response · Roblox
-  </footer>
-
-  <script>
-    window.addEventListener("DOMContentLoaded", () => {
-      // Ensure fade-in transition triggers
-      requestAnimationFrame(() => {
-        document.body.classList.add("fade-in");
-      });
-
-      // Safely create Lucide icons
-      if (window.lucide && typeof lucide.createIcons === 'function') {
-        lucide.createIcons();
-      }
-    });
-  </script>
-</body>
-</html>
