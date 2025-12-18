@@ -41,10 +41,7 @@
       transition: background 0.25s, color 0.25s;
     }
 
-    img.logo {
-      filter: var(--icon-filter);
-      transition: filter 0.3s;
-    }
+    img.logo { filter: var(--icon-filter); transition: filter 0.3s; }
 
     nav {
       position: sticky;
@@ -53,28 +50,18 @@
       justify-content: space-between;
       align-items: center;
       padding: 1rem 2rem;
-      z-index: 10;
+      z-index: 10000; /* on top of coins */
       background: var(--nav-bg);
       border-bottom: 1px solid var(--border);
       box-shadow: 0 8px 32px rgba(0,0,0,0.08);
       transition: background 0.3s, border 0.3s;
     }
 
-    nav a {
-      color: var(--text);
-      margin-left: 1.25rem;
-      text-decoration: none;
-      font-weight: 500;
-    }
+    nav a { color: var(--text); margin-left: 1.25rem; text-decoration: none; font-weight: 500; }
     nav a:hover { color: #1f4fff; }
     nav img { height: 32px; }
 
-    header {
-      padding: 5rem 1.5rem 4rem;
-      background: var(--footer-bg);
-      transition: background 0.3s;
-    }
-
+    header { padding: 5rem 1.5rem 4rem; background: var(--footer-bg); transition: background 0.3s; }
     header img { height: 120px; margin-bottom: 1rem; }
     header p { max-width: 720px; margin: 0 auto; font-size: 1.05rem; color: var(--text); }
 
@@ -169,37 +156,18 @@
       transition: left 0.25s;
     }
 
-    body.dark .toggle-switch {
-      background: #34c759; /* iOS green */
-    }
-
-    body.dark .toggle-switch .thumb {
-      left: 26px;
-    }
+    body.dark .toggle-switch { background: #34c759; }
+    body.dark .toggle-switch .thumb { left: 26px; }
 
     /* -------------------- COINS -------------------- */
     .coin {
       position: fixed;
-      width: 32px;
-      height: 32px;
+      width: 48px;
+      height: 48px;
       background: url('coin.png') no-repeat center/contain;
       pointer-events: none;
       z-index: 9999;
-      animation: fall 1s forwards;
-    }
-
-    @keyframes fall {
-      0% {
-        transform: translate(0, 0) rotate(0deg) scale(1);
-        opacity: 1;
-      }
-      50% {
-        transform: translate(var(--x-move, 0px), 250px) rotate(180deg) scale(1.2);
-      }
-      100% {
-        transform: translate(var(--x-move, 0px), 500px) rotate(360deg) scale(0.8);
-        opacity: 0;
-      }
+      will-change: transform, opacity;
     }
   </style>
 </head>
@@ -247,9 +215,7 @@
     <span class="footer-text">Oxford Response · Roblox</span>
     <div class="theme-toggle">
       <i data-lucide="sun"></i>
-      <div class="toggle-switch" id="themeSwitch">
-        <div class="thumb"></div>
-      </div>
+      <div class="toggle-switch" id="themeSwitch"><div class="thumb"></div></div>
       <i data-lucide="moon"></i>
     </div>
   </footer>
@@ -293,27 +259,44 @@
     updateStats();
     setInterval(updateStats, 15000);
 
-    // -------------------- Get Rich Easter Egg --------------------
+    // -------------------- Get Rich Burst --------------------
     const getRich = document.getElementById("getRich");
     getRich.addEventListener("click", () => {
       const rect = getRich.getBoundingClientRect();
 
-      for (let i = 0; i < 15; i++) {
+      for (let i = 0; i < 20; i++) {
         const coin = document.createElement("div");
         coin.classList.add("coin");
 
-        // Random start near image
-        const startX = rect.left + Math.random() * rect.width;
-        const startY = rect.top + Math.random() * rect.height / 2;
+        const startX = rect.left + rect.width / 2;
+        const startY = rect.top;
         coin.style.left = startX + "px";
         coin.style.top = startY + "px";
 
-        // Random horizontal movement
-        const xMove = (Math.random() - 0.5) * 200; // -100px to +100px
-        coin.style.setProperty("--x-move", xMove + "px");
-
         document.body.appendChild(coin);
-        setTimeout(() => coin.remove(), 1200);
+
+        const angle = Math.random() * Math.PI - Math.PI/2; // -90° to 90°
+        const speed = Math.random() * 8 + 6;
+        let posX = startX, posY = startY;
+        let velocityX = Math.cos(angle) * speed;
+        let velocityY = Math.sin(angle) * speed;
+        const gravity = 0.5;
+        const rotationSpeed = Math.random() * 20 - 10;
+        let rotation = 0;
+
+        const animate = () => {
+          velocityY += gravity;
+          posX += velocityX;
+          posY += velocityY;
+          rotation += rotationSpeed;
+
+          coin.style.transform = `translate(${posX - startX}px, ${posY - startY}px) rotate(${rotation}deg)`;
+          coin.style.opacity = 1 - (posY - startY)/500;
+
+          if(posY - startY < 500) requestAnimationFrame(animate);
+          else coin.remove();
+        };
+        animate();
       }
     });
   </script>
