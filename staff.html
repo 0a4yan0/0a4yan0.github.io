@@ -36,9 +36,9 @@ body {
   color: var(--text);
   margin: 0;
   text-align: center;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
 }
 
 img.logo { filter: var(--icon-filter); transition: filter 0.3s; }
@@ -52,7 +52,6 @@ nav {
   background: var(--nav-bg);
   border-bottom: 1px solid var(--border);
   box-shadow: 0 8px 32px rgba(0,0,0,0.07);
-  z-index: 999;
 }
 
 nav img { height: 32px; }
@@ -84,13 +83,18 @@ h2 { margin-bottom: 1rem; }
 
 /* Scrollable staff list */
 .staff-container {
-  flex: 1; /* fills remaining vertical space */
+  flex: 1;
   max-width: 400px;
   margin: 0 auto;
   overflow-y: auto;
+  overflow-x: hidden;
   padding: 1rem 0;
   scroll-behavior: smooth;
 }
+
+/* Hide scrollbars */
+.staff-container::-webkit-scrollbar { display: none; }
+.staff-container { -ms-overflow-style: none; scrollbar-width: none; }
 
 /* Staff cards */
 .staff-card {
@@ -107,9 +111,7 @@ h2 { margin-bottom: 1rem; }
   flex-shrink: 0;
   transition: transform 0.2s, background 0.2s;
 }
-.staff-card:hover {
-  transform: translateY(-3px);
-}
+.staff-card:hover { transform: translateY(-3px); }
 
 /* Footer */
 footer {
@@ -177,9 +179,7 @@ body.dark .toggle-switch .thumb { left: 26px; }
 <header>
   <img src="logo.svg" class="small-logo logo" alt="Oxford Response">
   <h2>Our Team</h2>
-  <p class="subheading">
-    Meet everyone who helps run Oxford Response.
-  </p>
+  <p class="subheading">Scroll through the list of staff members.</p>
 </header>
 
 <section class="staff-container">
