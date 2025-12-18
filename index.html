@@ -76,19 +76,9 @@
     }
 
     header img { height: 120px; margin-bottom: 1rem; }
+    header p { max-width: 720px; margin: 0 auto; font-size: 1.05rem; color: var(--text); }
 
-    header p {
-      max-width: 720px;
-      margin: 0 auto;
-      font-size: 1.05rem;
-      color: var(--text);
-    }
-
-    section {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 3.5rem 1.5rem;
-    }
+    section { max-width: 1100px; margin: 0 auto; padding: 3.5rem 1.5rem; }
 
     h2 { margin-bottom: 2rem; }
 
@@ -103,6 +93,7 @@
       border-radius: 18px;
       box-shadow: 0 12px 30px rgba(0,0,0,0.12);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
     }
 
     .feature img:hover {
@@ -144,14 +135,12 @@
       transition: background 0.3s, color 0.3s;
     }
 
-    /* Centered text */
     footer .footer-text {
       position: absolute;
       left: 50%;
       transform: translateX(-50%);
     }
 
-    /* Toggle on right */
     .theme-toggle {
       display: flex;
       align-items: center;
@@ -188,6 +177,22 @@
       left: 26px;
     }
 
+    /* -------------------- COINS -------------------- */
+    .coin {
+      position: fixed;
+      width: 32px;
+      height: 32px;
+      background: url('coin.png') no-repeat center/contain;
+      pointer-events: none;
+      animation: fall 1s linear forwards;
+      z-index: 9999;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(500px) rotate(360deg); opacity: 0; }
+    }
+
   </style>
 </head>
 
@@ -216,7 +221,7 @@
     <div class="features">
       <div class="feature"><img src="fight-crime.webp" alt=""></div>
       <div class="feature"><img src="save-lives.webp" alt=""></div>
-      <div class="feature"><img src="get-rich.webp" alt=""></div>
+      <div class="feature" id="getRich"><img src="get-rich.webp" alt="Get Rich"></div>
     </div>
   </section>
 
@@ -242,7 +247,7 @@
   </footer>
 
   <script>
-    // Dark mode
+    // -------------------- Dark Mode --------------------
     if (localStorage.getItem("theme") === "dark") document.body.classList.add("dark");
 
     const toggle = document.getElementById("themeSwitch");
@@ -251,7 +256,12 @@
       localStorage.setItem("theme", document.body.classList.contains("dark") ? "dark" : "light");
     });
 
-    // Stats fetch
+    // -------------------- Lucide Icons --------------------
+    window.addEventListener("DOMContentLoaded", () => {
+      lucide.createIcons();
+    });
+
+    // -------------------- Stats --------------------
     async function updateStats() {
       try {
         const res = await fetch("https://oxford-response-stats.aayan-sb.workers.dev");
@@ -275,7 +285,19 @@
     updateStats();
     setInterval(updateStats, 15000);
 
-    window.addEventListener("DOMContentLoaded", () => { lucide.createIcons(); });
+    // -------------------- Get Rich Easter Egg --------------------
+    const getRich = document.getElementById("getRich");
+    getRich.addEventListener("click", () => {
+      for (let i = 0; i < 10; i++) {
+        const coin = document.createElement("div");
+        coin.classList.add("coin");
+        coin.style.left = (getRich.offsetLeft + Math.random() * getRich.offsetWidth) + "px";
+        coin.style.top = (getRich.offsetTop) + "px";
+        document.body.appendChild(coin);
+        setTimeout(() => coin.remove(), 1000);
+      }
+    });
+
   </script>
 </body>
 </html>
