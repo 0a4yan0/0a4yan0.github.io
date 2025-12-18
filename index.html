@@ -161,12 +161,13 @@
 
     /* -------------------- COINS -------------------- */
     .coin {
-      position: absolute; /* move with page */
+      position: absolute;
       width: 48px;
       height: 48px;
       background: url('coin.png') no-repeat center/contain;
       pointer-events: none;
-      will-change: transform, opacity, z-index;
+      will-change: transform, opacity;
+      z-index: 500; /* below navbar */
     }
   </style>
 </head>
@@ -256,26 +257,18 @@
     const getRich = document.getElementById("getRich");
     getRich.addEventListener("click", () => {
       const rect = getRich.getBoundingClientRect();
-      const scrollTop = window.scrollY;
-      const scrollLeft = window.scrollX;
+      const startX = rect.left + rect.width / 2 + window.scrollX;
+      const startY = rect.top + window.scrollY;
 
       for (let i = 0; i < 20; i++) {
         const coin = document.createElement("div");
         coin.classList.add("coin");
-
-        const startX = rect.left + rect.width / 2 + scrollLeft;
-        const startY = rect.top + scrollTop;
-        coin.style.left = startX + "px";
-        coin.style.top = startY + "px";
-        coin.style.zIndex = 0;
-
         document.body.appendChild(coin);
 
-        let angle = Math.random() * Math.PI / 4;
-        if (Math.random() < 0.5) angle *= -1;
-        const speed = Math.random() * 8 + 6;
+        let angle = (Math.random() * Math.PI / 4) * (Math.random() < 0.5 ? -1 : 1);
+        let speed = Math.random() * 8 + 6;
 
-        let posX = startX, posY = startY;
+        let posX = 0, posY = 0;
         let velocityX = Math.sin(angle) * speed;
         let velocityY = -Math.cos(angle) * speed;
         const gravity = 0.5;
@@ -288,12 +281,13 @@
           posY += velocityY;
           rotation += rotationSpeed;
 
-          if(posY - startY < -30) coin.style.zIndex = 10000;
+          // Adjust position relative to scroll
+          coin.style.left = startX + posX + "px";
+          coin.style.top = startY + posY + "px";
+          coin.style.transform = `rotate(${rotation}deg)`;
+          coin.style.opacity = 1 - posY/500;
 
-          coin.style.transform = `translate(${posX - startX}px, ${posY - startY}px) rotate(${rotation}deg)`;
-          coin.style.opacity = 1 - (posY - startY)/500;
-
-          if(posY - startY < 500) requestAnimationFrame(animate);
+          if (posY < 500) requestAnimationFrame(animate);
           else coin.remove();
         };
         animate();
