@@ -81,6 +81,8 @@
       box-shadow: 0 12px 30px rgba(0,0,0,0.12);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       cursor: pointer;
+      position: relative;
+      z-index: 1;
     }
 
     .feature img:hover {
@@ -166,8 +168,7 @@
       height: 48px;
       background: url('coin.png') no-repeat center/contain;
       pointer-events: none;
-      z-index: 9999;
-      will-change: transform, opacity;
+      will-change: transform, opacity, z-index;
     }
   </style>
 </head>
@@ -231,9 +232,7 @@
     });
 
     // -------------------- Lucide Icons --------------------
-    window.addEventListener("DOMContentLoaded", () => {
-      lucide.createIcons();
-    });
+    window.addEventListener("DOMContentLoaded", () => { lucide.createIcons(); });
 
     // -------------------- Stats --------------------
     async function updateStats() {
@@ -241,17 +240,13 @@
         const res = await fetch("https://oxford-response-stats.aayan-sb.workers.dev");
         const json = await res.json();
         const g = json?.data?.[0];
-
         if (!g) throw new Error();
-
         document.getElementById("visits").textContent = (g.visits ?? g.visitCount ?? 0).toLocaleString();
         document.getElementById("playing").textContent = (g.playing ?? 0).toLocaleString();
         document.getElementById("favorites").textContent = (g.favoritesCount ?? 0).toLocaleString();
-
         const online = g.playing > 0;
         document.getElementById("status").textContent = online ? "Online" : "Offline";
         document.getElementById("status").className = online ? "online" : "offline";
-
       } catch {
         ["visits","playing","favorites","status"].forEach(id => document.getElementById(id).textContent = "N/A");
       }
@@ -259,7 +254,7 @@
     updateStats();
     setInterval(updateStats, 15000);
 
-    // -------------------- Get Rich Burst (Symmetric) --------------------
+    // -------------------- Get Rich Burst (Emerging from Image) --------------------
     const getRich = document.getElementById("getRich");
     getRich.addEventListener("click", () => {
       const rect = getRich.getBoundingClientRect();
@@ -272,17 +267,17 @@
         const startY = rect.top;
         coin.style.left = startX + "px";
         coin.style.top = startY + "px";
+        coin.style.zIndex = 0; // start behind image
 
         document.body.appendChild(coin);
 
-        // Angle: small upward arc, half left, half right
-        let angle = Math.random() * Math.PI / 4; // 0 to 45 degrees
-        if (Math.random() < 0.5) angle *= -1; // flip left half
+        let angle = Math.random() * Math.PI / 4;
+        if (Math.random() < 0.5) angle *= -1;
         const speed = Math.random() * 8 + 6;
 
         let posX = startX, posY = startY;
         let velocityX = Math.sin(angle) * speed;
-        let velocityY = -Math.cos(angle) * speed; // go up
+        let velocityY = -Math.cos(angle) * speed;
         const gravity = 0.5;
         const rotationSpeed = Math.random() * 20 - 10;
         let rotation = 0;
@@ -292,6 +287,9 @@
           posX += velocityX;
           posY += velocityY;
           rotation += rotationSpeed;
+
+          // Switch z-index to go over the image after rising a bit
+          if(posY - startY < -30) coin.style.zIndex = 10000;
 
           coin.style.transform = `translate(${posX - startX}px, ${posY - startY}px) rotate(${rotation}deg)`;
           coin.style.opacity = 1 - (posY - startY)/500;
