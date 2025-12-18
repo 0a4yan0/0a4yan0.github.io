@@ -259,7 +259,7 @@
     updateStats();
     setInterval(updateStats, 15000);
 
-    // -------------------- Get Rich Burst --------------------
+    // -------------------- Get Rich Burst (Symmetric) --------------------
     const getRich = document.getElementById("getRich");
     getRich.addEventListener("click", () => {
       const rect = getRich.getBoundingClientRect();
@@ -275,7 +275,8 @@
 
         document.body.appendChild(coin);
 
-        const angle = Math.random() * Math.PI - Math.PI/2; // -90° to 90°
+        // Symmetric burst: evenly left and right
+        const angle = (Math.random() - 0.5) * Math.PI; // -π/2 to π/2
         const speed = Math.random() * 8 + 6;
         let posX = startX, posY = startY;
         let velocityX = Math.cos(angle) * speed;
