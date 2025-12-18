@@ -6,169 +6,104 @@
 <link rel="icon" href="favicon.png" type="image/png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<script src="https://unpkg.com/lucide@latest" defer></script>
-
 <style>
-:root {
-  --bg: #ffffff;
-  --text: #1a1a1a;
-  --card-bg: #333;
-  --nav-bg: #ffffff;
-  --footer-bg: #f5f7fb;
-  --border: #e6e6e6;
-  --icon-filter: invert(0);
-}
-
-body.dark {
-  --bg: #0d0d0d;
-  --text: #eaeaea;
-  --card-bg: #1a1a1a;
-  --nav-bg: #111;
-  --footer-bg: #111;
-  --border: #222;
-  --icon-filter: invert(1) brightness(1.2);
-}
-
 body {
   font-family: Arial, sans-serif;
-  background: var(--bg);
-  color: var(--text);
+  background: #ffffff;
+  color: #1a1a1a;
   margin: 0;
   text-align: center;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
 }
 
-img.logo { filter: var(--icon-filter); transition: filter 0.3s; }
-
-/* Navbar */
 nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background: var(--nav-bg);
-  border-bottom: 1px solid var(--border);
+  background: #ffffff;
+  border-bottom: 1px solid #e6e6e6;
   box-shadow: 0 8px 32px rgba(0,0,0,0.07);
-  flex-shrink: 0;
 }
 nav img { height: 32px; }
 nav a {
-  color: var(--text);
-  margin-left: 1.2rem;
+  color: #1a1a1a;
+  margin-left: 1.25rem;
   text-decoration: none;
   font-weight: 500;
 }
 nav a:hover { color: #1f4fff; }
 
-/* Header */
 header {
-  padding: 3rem 1.5rem 1rem;
-  flex-shrink: 0;
+  padding: 3rem 1.5rem 2rem;
 }
-.small-logo { height: 70px; margin: 0 auto 1.5rem; display: block; }
-h2 { margin-bottom: 1rem; }
-.subheading {
-  margin-top: 1rem;
-  font-size: 1rem;
+header h2 { margin-bottom: 0.5rem; }
+header p {
   color: #555;
   max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto;
   line-height: 1.5;
 }
 
-/* Scrollable staff list */
-.staff-container {
-  flex: 1;
-  max-width: 600px;
-  margin: 0 auto;
-  overflow-y: auto;
-  overflow-x: hidden;
-  padding: 1rem 0;
-  scroll-behavior: smooth;
+/* Team grid */
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 2rem auto;
 }
 
-/* Hide scrollbars */
-.staff-container::-webkit-scrollbar { display: none; }
-.staff-container { -ms-overflow-style: none; scrollbar-width: none; }
-
-/* Staff cards */
-.staff-card {
-  background: var(--card-bg);
-  border-radius: 12px;
-  padding: 1rem 1.5rem;
-  margin-bottom: 1rem;
-  color: white;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+.team-card {
+  background: #f5f7fb;
+  border-radius: 16px;
+  padding: 1.5rem 1rem 2rem;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%; /* full width of container */
-  opacity: 0;
-  transform: translateY(20px);
-  transition: transform 0.4s ease, opacity 0.4s ease;
+  text-align: center;
 }
-.staff-card.visible {
-  opacity: 1;
-  transform: translateY(0);
+
+.team-card img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+}
+
+.team-card h3 {
+  margin: 0.25rem 0;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+}
+
+.team-card span.role {
+  font-size: 0.8rem;
+  color: #888;
+  letter-spacing: 1px;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.team-card p {
+  font-size: 0.85rem;
+  color: #555;
+  line-height: 1.3;
 }
 
 /* Footer */
 footer {
   text-align: center;
-  padding: 1.5rem 2rem;
-  background: var(--footer-bg);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  flex-shrink: 0;
+  padding: 2rem;
+  background: #f5f7fb;
+  font-size: 1rem;
 }
-
-footer .footer-text {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.theme-toggle {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-left: auto;
-}
-
-.toggle-switch {
-  width: 52px;
-  height: 28px;
-  background: #ccc;
-  border-radius: 50px;
-  position: relative;
-  cursor: pointer;
-  transition: background 0.25s;
-}
-
-.toggle-switch .thumb {
-  width: 24px;
-  height: 24px;
-  background: white;
-  border-radius: 50%;
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  transition: left 0.25s;
-}
-
-body.dark .toggle-switch { background: #34c759; }
-body.dark .toggle-switch .thumb { left: 26px; }
 </style>
 </head>
 
 <body>
 <nav>
-  <div><img src="logo.svg" class="logo" alt="Oxford Response Logo"></div>
+  <div><img src="logo.svg" alt="Oxford Response Logo"></div>
   <div>
     <a href="index.html">Home</a>
     <a href="teams.html">Teams</a>
@@ -179,63 +114,100 @@ body.dark .toggle-switch .thumb { left: 26px; }
 </nav>
 
 <header>
-  <img src="logo.svg" class="small-logo logo" alt="Oxford Response">
   <h2>Our Team</h2>
-  <p class="subheading">Scroll through the list of staff members.</p>
+  <p>Meet the Oxford Response staff. Ordered from highest role to lowest role.</p>
 </header>
 
-<section class="staff-container" id="staffContainer">
-  <div class="staff-card"><h3>Neo</h3><p>Oxford Team</p></div>
-  <div class="staff-card"><h3>Kam</h3><p>Oxford Team</p></div>
-  <div class="staff-card"><h3>Omitser</h3><p>Administration</p></div>
-  <div class="staff-card"><h3>C_ommando</h3><p>Contributor</p></div>
-  <div class="staff-card"><h3>Rezqyb</h3><p>Contributor</p></div>
-  <div class="staff-card"><h3>Elkkuu007</h3><p>Mod</p></div>
-  <div class="staff-card"><h3>24vmarti</h3><p>Mod</p></div>
-  <div class="staff-card"><h3>Senpai_mangue</h3><p>Mod</p></div>
-  <div class="staff-card"><h3>Spec1fic</h3><p>Mod</p></div>
-  <div class="staff-card"><h3>Rerfah</h3><p>Mod</p></div>
-  <div class="staff-card"><h3>Void</h3><p>Trial Mod</p></div>
-  <div class="staff-card"><h3>Tycoonmoom</h3><p>Trial Mod</p></div>
-  <div class="staff-card"><h3>Warriorcrye</h3><p>Trial Mod</p></div>
+<section class="team-grid">
+  <!-- Oxford Team -->
+  <div class="team-card">
+    <img src="placeholder.png" alt="Neo">
+    <h3>Neo</h3>
+    <span class="role">Oxford Team</span>
+    <p>Top-level member of the Oxford Team</p>
+  </div>
+  <div class="team-card">
+    <img src="placeholder.png" alt="Kam">
+    <h3>Kam</h3>
+    <span class="role">Oxford Team</span>
+    <p>Top-level member of the Oxford Team</p>
+  </div>
+
+  <!-- Administration -->
+  <div class="team-card">
+    <img src="placeholder.png" alt="Omitser">
+    <h3>Omitser</h3>
+    <span class="role">Administration</span>
+    <p>Manages administrative tasks</p>
+  </div>
+
+  <!-- Contributors -->
+  <div class="team-card">
+    <img src="placeholder.png" alt="C_ommando">
+    <h3>C_ommando</h3>
+    <span class="role">Contributor</span>
+    <p>Helps contribute to the project</p>
+  </div>
+  <div class="team-card">
+    <img src="placeholder.png" alt="Rezqyb">
+    <h3>Rezqyb</h3>
+    <span class="role">Contributor</span>
+    <p>Helps contribute to the project</p>
+  </div>
+
+  <!-- Mods -->
+  <div class="team-card">
+    <img src="placeholder.png" alt="Elkkuu007">
+    <h3>Elkkuu007</h3>
+    <span class="role">Mod</span>
+    <p>Moderates the game</p>
+  </div>
+  <div class="team-card">
+    <img src="placeholder.png" alt="24vmarti">
+    <h3>24vmarti</h3>
+    <span class="role">Mod</span>
+    <p>Moderates the game</p>
+  </div>
+  <div class="team-card">
+    <img src="placeholder.png" alt="Senpai_mangue">
+    <h3>Senpai_mangue</h3>
+    <span class="role">Mod</span>
+    <p>Moderates the game</p>
+  </div>
+  <div class="team-card">
+    <img src="placeholder.png" alt="Spec1fic">
+    <h3>Spec1fic</h3>
+    <span class="role">Mod</span>
+    <p>Moderates the game</p>
+  </div>
+  <div class="team-card">
+    <img src="placeholder.png" alt="Rerfah">
+    <h3>Rerfah</h3>
+    <span class="role">Mod</span>
+    <p>Moderates the game</p>
+  </div>
+
+  <!-- Trial Mods -->
+  <div class="team-card">
+    <img src="placeholder.png" alt="Void">
+    <h3>Void</h3>
+    <span class="role">Trial Mod</span>
+    <p>Trial moderator</p>
+  </div>
+  <div class="team-card">
+    <img src="placeholder.png" alt="Tycoonmoom">
+    <h3>Tycoonmoom</h3>
+    <span class="role">Trial Mod</span>
+    <p>Trial moderator</p>
+  </div>
+  <div class="team-card">
+    <img src="placeholder.png" alt="Warriorcrye">
+    <h3>Warriorcrye</h3>
+    <span class="role">Trial Mod</span>
+    <p>Trial moderator</p>
+  </div>
 </section>
 
-<footer>
-  <span class="footer-text">Oxford Response · Roblox</span>
-  <div class="theme-toggle">
-    <i data-lucide="sun"></i>
-    <div class="toggle-switch" id="themeSwitch"><div class="thumb"></div></div>
-    <i data-lucide="moon"></i>
-  </div>
-</footer>
-
-<script>
-  // Dark mode toggle
-  if(localStorage.getItem("theme") === "dark") document.body.classList.add("dark");
-  const toggle = document.getElementById("themeSwitch");
-  toggle.addEventListener("click", () => {
-    document.body.classList.toggle("dark");
-    localStorage.setItem("theme", document.body.classList.contains("dark") ? "dark" : "light");
-  });
-
-  // Lucide icons
-  window.addEventListener("DOMContentLoaded", () => { lucide.createIcons(); });
-
-  // Push-up animation for staff cards
-  const staffCards = document.querySelectorAll('.staff-card');
-  const container = document.getElementById('staffContainer');
-
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      } else {
-        entry.target.classList.remove('visible');
-      }
-    });
-  }, { root: container, threshold: 0.1 });
-
-  staffCards.forEach(card => observer.observe(card));
-</script>
+<footer>Oxford Response · Roblox</footer>
 </body>
 </html>
