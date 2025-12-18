@@ -1,260 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Oxford Response — Teams</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <title>Oxford Response — Teams</title>
+  <link rel="icon" href="favicon.png" type="image/png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Lucide Icons -->
-<script src="https://unpkg.com/lucide@latest" defer></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
 
-<style>
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #ffffff;
-  color: #000;
-  transition: background 0.3s, color 0.3s;
-}
+  <style>
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: Arial, sans-serif;
+      background: #ffffff;
+      color: #1a1a1a;
+      margin: 0;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    body.fade-in { opacity: 1; }
 
-/* Dark mode */
-body.dark {
-  background: #1a1a1a;
-  color: #e2e2e2;
-}
+    nav {
+      position: sticky; top: 0;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1rem 2rem;
+      background: #ffffff;
+      border-bottom: 1px solid #e6e6e6;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.07);
+      z-index: 10;
+    }
+    nav img { height: 32px; }
+    nav a {
+      color: #1a1a1a;
+      margin-left: 1.2rem;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    nav a:hover { color: #1f4fff; }
 
-/* NAVBAR */
-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 2rem;
-  background: #fff;
-  border-bottom: 1px solid #eee;
-  transition: background 0.3s, color 0.3s;
-}
-body.dark nav {
-  background: #111;
-  border-color: #333;
-}
+    header {
+      padding: 3rem 1.5rem 1rem;
+    }
 
-nav img {
-  height: 32px;
-  filter: invert(1); /* Auto-invert logos in dark mode */
-}
-body:not(.dark) nav img {
-  filter: none;
-}
+    /* Logo above choose your team */
+    .small-logo {
+      height: 70px;
+      margin: 0 auto 1.5rem;
+      display: block;
+    }
 
-nav a {
-  color: #000;
-  text-decoration: none;
-  margin-left: 1.25rem;
-  font-weight: 500;
-}
-body.dark nav a {
-  color: #e2e2e2;
-}
+    .teams-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem;
+    }
 
-nav a:hover {
-  color: #2f4fff;
-}
+    h2 { margin-bottom: 2rem; }
 
-/* HEADER */
-header {
-  text-align: center;
-  padding: 3rem 1rem 1rem;
-}
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2rem;
+    }
 
-header h1 {
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
-}
+    .team-card {
+      background: #1f4fff;
+      border-radius: 16px;
+      padding: 2.2rem 1.5rem;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      cursor: pointer;
+      color: white;
+    }
+    .team-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.22);
+    }
 
-header p {
-  max-width: 600px;
-  margin: auto;
-  color: #555;
-}
-body.dark header p {
-  color: #bbb;
-}
+    .team-icon {
+      width: 64px;
+      height: 64px;
+      margin-bottom: 1rem;
+      color: white;
+    }
 
-/* CARDS SECTION */
-#team-container {
-  max-width: 1050px;
-  margin: 2rem auto 4rem;
-  padding: 1rem;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-  gap: 1.8rem;
-}
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background: #f5f7fb;
+      margin-top: 3rem;
+    }
+  </style>
 
-.team-card {
-  background: #f5f7fb;
-  border-radius: 16px;
-  padding: 1.5rem;
-  text-align: center;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-  transition: transform 0.25s, background 0.3s;
-  cursor: pointer;
-}
-body.dark .team-card {
-  background: #222;
-  color: #eaeaea;
-}
-
-.team-card:hover {
-  transform: translateY(-6px);
-}
-
-.team-card img {
-  height: 80px;
-  margin-bottom: 1rem;
-}
-
-.team-card h3 {
-  margin: 0.5rem 0;
-  font-size: 1.3rem;
-}
-
-/* FOOTER */
-footer {
-  margin-top: 3rem;
-  background: #f5f7fb;
-  padding: 2rem;
-  text-align: center;
-  position: relative;
-}
-body.dark footer {
-  background: #111;
-  color: #ccc;
-}
-
-/* DARK MODE TOGGLE — iOS Slider */
-.toggle-container {
-  position: absolute;
-  right: 1.2rem;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
-}
-
-.toggle-slider {
-  width: 50px;
-  height: 26px;
-  border-radius: 26px;
-  background: #ccc;
-  cursor: pointer;
-  position: relative;
-  transition: background 0.3s;
-}
-
-.toggle-slider::after {
-  content: "";
-  position: absolute;
-  top: 3px;
-  left: 3px;
-  width: 20px;
-  height: 20px;
-  background: #fff;
-  border-radius: 50%;
-  transition: left 0.3s;
-}
-
-.toggle-slider.active {
-  background: #34c759; /* iOS green */
-}
-
-.toggle-slider.active::after {
-  left: 27px;
-}
-</style>
 </head>
-
 <body>
+  <nav>
+    <div><img src="logo.svg" alt="Oxford Response Logo"></div>
+    <div>
+      <a href="index.html">Home</a>
+      <a href="teams.html">Teams</a>
+      <a href="story.html">Story</a>
+      <a href="roleplay.html">Roleplay</a>
+      <a href="staff.html">Our Team</a>
+    </div>
+  </nav>
 
-<!-- NAVBAR -->
-<nav>
-  <img src="logo.svg" alt="Logo">
-  <div>
-    <a href="index.html">Home</a>
-    <a href="teams.html">Teams</a>
-    <a href="story.html">Story</a>
-    <a href="roleplay.html">Roleplay</a>
-    <a href="staff.html">Our Team</a>
-  </div>
-</nav>
+  <header>
+    <img src="logo.svg" class="small-logo" alt="Oxford Response">
+    <h2>Choose Your Team</h2>
+  </header>
 
-<!-- HEADER -->
-<header>
-  <h1>Choose Your Team</h1>
-  <p>
-    Serve the public, protect the streets, save lives, or keep the roads moving.<br>
-    Each team offers a unique roleplay experience in Oxford Response.
-  </p>
-</header>
+  <section class="teams-container">
+    <div class="team-grid">
 
-<!-- TEAMS GRID -->
-<div id="team-container">
+      <!-- CIVILIAN -->
+      <div class="team-card">
+        <i data-lucide="user-round" class="team-icon"></i>
+        <h3>Civilian</h3>
+      </div>
 
-  <div class="team-card">
-    <img src="police.png" alt="Police">
-    <h3>Police</h3>
-    <p>Protect the streets, respond to emergencies, and uphold the law.</p>
-  </div>
+      <!-- POLICE -->
+      <div class="team-card">
+        <i data-lucide="shield" class="team-icon"></i>
+        <h3>Police</h3>
+      </div>
 
-  <div class="team-card">
-    <img src="fire.png" alt="Fire & Rescue">
-    <h3>Fire & Rescue</h3>
-    <p>Save lives, tackle fires, and handle rescue operations.</p>
-  </div>
+      <!-- NHS -->
+      <div class="team-card">
+        <i data-lucide="cross" class="team-icon"></i>
+        <h3>NHS</h3>
+      </div>
 
-  <div class="team-card">
-    <img src="medical.png" alt="Medical">
-    <h3>Medical</h3>
-    <p>Provide lifesaving care as part of Oxford’s emergency response.</p>
-  </div>
+      <!-- NATIONAL HIGHWAYS -->
+      <div class="team-card">
+        <i data-lucide="traffic-cone" class="team-icon"></i>
+        <h3>National Highways</h3>
+      </div>
 
-  <div class="team-card">
-    <img src="highways.png" alt="Highways">
-    <h3>Highways</h3>
-    <p>Manage traffic, repair road hazards, and keep Oxford moving.</p>
-  </div>
+    </div>
+  </section>
 
-</div>
+  <footer>
+    Oxford Response · Roblox
+  </footer>
 
-<!-- FOOTER -->
-<footer>
-  Oxford Response · Roblox
-  <div class="toggle-container">
-    <i data-lucide="sun"></i>
-    <div class="toggle-slider" id="darkToggle"></div>
-    <i data-lucide="moon"></i>
-  </div>
-</footer>
-
-<script>
-window.addEventListener("DOMContentLoaded", () => {
-  lucide.createIcons();
-
-  const toggle = document.getElementById("darkToggle");
-  const body = document.body;
-
-  if (localStorage.getItem("darkMode") === "true") {
-    body.classList.add("dark");
-    toggle.classList.add("active");
-  }
-
-  toggle.addEventListener("click", () => {
-    body.classList.toggle("dark");
-    toggle.classList.toggle("active");
-    localStorage.setItem("darkMode", body.classList.contains("dark"));
-  });
-});
-</script>
+  <script>
+    window.addEventListener("DOMContentLoaded", () => {
+      document.body.classList.add("fade-in");
+      lucide.createIcons();
+    });
+  </script>
 
 </body>
 </html>
