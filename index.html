@@ -30,7 +30,8 @@
       --icon-filter: invert(1) brightness(1.2);
     }
 
-    body { 
+    html, body {
+      overflow-x: hidden; /* prevent horizontal scrollbar */
       font-family: Arial, sans-serif; 
       background-color: var(--bg);
       color: var(--text);
@@ -49,7 +50,7 @@
       justify-content: space-between;
       align-items: center;
       padding: 1rem 2rem;
-      z-index: 10000;
+      z-index: 9999; /* always above coins */
       background: var(--nav-bg);
       border-bottom: 1px solid var(--border);
       box-shadow: 0 8px 32px rgba(0,0,0,0.08);
@@ -167,7 +168,8 @@
       background: url('coin.png') no-repeat center/contain;
       pointer-events: none;
       will-change: transform, opacity;
-      z-index: 500; /* below navbar */
+      z-index: 10; /* over image initially */
+      transition: z-index 0s;
     }
   </style>
 </head>
@@ -274,6 +276,7 @@
         const gravity = 0.5;
         const rotationSpeed = Math.random() * 20 - 10;
         let rotation = 0;
+        let switchedZ = false;
 
         const animate = () => {
           velocityY += gravity;
@@ -281,11 +284,15 @@
           posY += velocityY;
           rotation += rotationSpeed;
 
-          // Adjust position relative to scroll
+          if (!switchedZ && velocityY > 0) {
+            coin.style.zIndex = 1; // move below image after peak
+            switchedZ = true;
+          }
+
           coin.style.left = startX + posX + "px";
           coin.style.top = startY + posY + "px";
           coin.style.transform = `rotate(${rotation}deg)`;
-          coin.style.opacity = 1 - posY/500;
+          coin.style.opacity = 1 - posY / 500;
 
           if (posY < 500) requestAnimationFrame(animate);
           else coin.remove();
