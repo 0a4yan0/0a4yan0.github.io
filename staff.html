@@ -6,7 +6,6 @@
 <link rel="icon" href="favicon.png" type="image/png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Lucide Icons -->
 <script src="https://unpkg.com/lucide@latest" defer></script>
 
 <style>
@@ -52,8 +51,8 @@ nav {
   background: var(--nav-bg);
   border-bottom: 1px solid var(--border);
   box-shadow: 0 8px 32px rgba(0,0,0,0.07);
+  flex-shrink: 0;
 }
-
 nav img { height: 32px; }
 nav a {
   color: var(--text);
@@ -70,7 +69,6 @@ header {
 }
 .small-logo { height: 70px; margin: 0 auto 1.5rem; display: block; }
 h2 { margin-bottom: 1rem; }
-
 .subheading {
   margin-top: 1rem;
   font-size: 1rem;
@@ -84,7 +82,7 @@ h2 { margin-bottom: 1rem; }
 /* Scrollable staff list */
 .staff-container {
   flex: 1;
-  max-width: 400px;
+  max-width: 600px;
   margin: 0 auto;
   overflow-y: auto;
   overflow-x: hidden;
@@ -107,11 +105,15 @@ h2 { margin-bottom: 1rem; }
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%; /* equal width */
-  flex-shrink: 0;
-  transition: transform 0.2s, background 0.2s;
+  width: 100%; /* full width of container */
+  opacity: 0;
+  transform: translateY(20px);
+  transition: transform 0.4s ease, opacity 0.4s ease;
 }
-.staff-card:hover { transform: translateY(-3px); }
+.staff-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
 
 /* Footer */
 footer {
@@ -182,7 +184,7 @@ body.dark .toggle-switch .thumb { left: 26px; }
   <p class="subheading">Scroll through the list of staff members.</p>
 </header>
 
-<section class="staff-container">
+<section class="staff-container" id="staffContainer">
   <div class="staff-card"><h3>Neo</h3><p>Oxford Team</p></div>
   <div class="staff-card"><h3>Kam</h3><p>Oxford Team</p></div>
   <div class="staff-card"><h3>Omitser</h3><p>Administration</p></div>
@@ -218,6 +220,22 @@ body.dark .toggle-switch .thumb { left: 26px; }
 
   // Lucide icons
   window.addEventListener("DOMContentLoaded", () => { lucide.createIcons(); });
+
+  // Push-up animation for staff cards
+  const staffCards = document.querySelectorAll('.staff-card');
+  const container = document.getElementById('staffContainer');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      } else {
+        entry.target.classList.remove('visible');
+      }
+    });
+  }, { root: container, threshold: 0.1 });
+
+  staffCards.forEach(card => observer.observe(card));
 </script>
 </body>
 </html>
