@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Oxford Response — Teams</title>
-<link rel="icon" href="favicon.png" type="image/png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- Lucide Icons -->
@@ -12,9 +11,9 @@
 <style>
 body {
   margin: 0;
-  background: #fff;
-  color: #000;
   font-family: Arial, sans-serif;
+  background: #ffffff;
+  color: #000;
   transition: background 0.3s, color 0.3s;
 }
 
@@ -30,9 +29,8 @@ nav {
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background: #ffffff;
-  border-bottom: 1px solid #e6e6e6;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.07);
+  background: #fff;
+  border-bottom: 1px solid #eee;
   transition: background 0.3s, color 0.3s;
 }
 body.dark nav {
@@ -42,6 +40,10 @@ body.dark nav {
 
 nav img {
   height: 32px;
+  filter: invert(1); /* Auto-invert logos in dark mode */
+}
+body:not(.dark) nav img {
+  filter: none;
 }
 
 nav a {
@@ -61,95 +63,78 @@ nav a:hover {
 /* HEADER */
 header {
   text-align: center;
-  padding: 3rem 1rem 2rem;
+  padding: 3rem 1rem 1rem;
 }
 
-header h2 {
+header h1 {
+  font-size: 2rem;
   margin-bottom: 0.5rem;
 }
 
 header p {
   max-width: 600px;
   margin: auto;
-  color: #666;
+  color: #555;
 }
 body.dark header p {
   color: #bbb;
 }
 
-/* TEAM SECTIONS */
-.team-section {
-  max-width: 1000px;
+/* CARDS SECTION */
+#team-container {
+  max-width: 1050px;
   margin: 2rem auto 4rem;
-  padding: 0 1rem;
-}
-
-.team-title {
-  text-align: center;
-  font-size: 1.6rem;
-  margin-bottom: 1.5rem;
-  letter-spacing: 1px;
-}
-
-.team-cards {
+  padding: 1rem;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1.8rem;
 }
 
-/* TEAM CARD */
 .team-card {
   background: #f5f7fb;
   border-radius: 16px;
-  padding: 1.5rem 1rem 2rem;
+  padding: 1.5rem;
   text-align: center;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-  transition: background 0.3s, color 0.3s;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+  transition: transform 0.25s, background 0.3s;
+  cursor: pointer;
 }
 body.dark .team-card {
   background: #222;
-  color: #ddd;
+  color: #eaeaea;
+}
+
+.team-card:hover {
+  transform: translateY(-6px);
 }
 
 .team-card img {
-  width: 85px;
-  height: 85px;
-  border-radius: 50%;
+  height: 80px;
   margin-bottom: 1rem;
 }
 
 .team-card h3 {
   margin: 0.5rem 0;
-  font-size: 1.2rem;
-}
-
-.team-card .desc {
-  font-size: 0.9rem;
-  color: #555;
-  max-width: 260px;
-  margin: auto;
-}
-body.dark .team-card .desc {
-  color: #bbb;
+  font-size: 1.3rem;
 }
 
 /* FOOTER */
 footer {
-  text-align: center;
-  padding: 2rem;
+  margin-top: 3rem;
   background: #f5f7fb;
+  padding: 2rem;
+  text-align: center;
   position: relative;
-  transition: background 0.3s;
 }
 body.dark footer {
   background: #111;
   color: #ccc;
 }
 
-/* DARK MODE TOGGLE */
+/* DARK MODE TOGGLE — iOS Slider */
 .toggle-container {
   position: absolute;
-  right: 1.25rem;
+  right: 1.2rem;
   top: 50%;
   transform: translateY(-50%);
   display: flex;
@@ -159,18 +144,19 @@ body.dark footer {
 
 .toggle-slider {
   width: 50px;
-  height: 24px;
+  height: 26px;
+  border-radius: 26px;
   background: #ccc;
-  border-radius: 12px;
   cursor: pointer;
   position: relative;
+  transition: background 0.3s;
 }
 
 .toggle-slider::after {
   content: "";
   position: absolute;
-  top: 2px;
-  left: 2px;
+  top: 3px;
+  left: 3px;
   width: 20px;
   height: 20px;
   background: #fff;
@@ -178,21 +164,21 @@ body.dark footer {
   transition: left 0.3s;
 }
 
-/* Slider active (dark mode ON) */
 .toggle-slider.active {
-  background: #444;
+  background: #34c759; /* iOS green */
 }
+
 .toggle-slider.active::after {
-  left: 28px;
+  left: 27px;
 }
 </style>
 </head>
 
 <body>
 
-<!-- NAV -->
+<!-- NAVBAR -->
 <nav>
-  <div><img src="logo.svg" alt="Logo"></div>
+  <img src="logo.svg" alt="Logo">
   <div>
     <a href="index.html">Home</a>
     <a href="teams.html">Teams</a>
@@ -204,21 +190,41 @@ body.dark footer {
 
 <!-- HEADER -->
 <header>
-  <h2>Teams</h2>
-  <p>View all Oxford Response teams and their structure.</p>
+  <h1>Choose Your Team</h1>
+  <p>
+    Serve the public, protect the streets, save lives, or keep the roads moving.<br>
+    Each team offers a unique roleplay experience in Oxford Response.
+  </p>
 </header>
 
-<!-- SECTION EXAMPLE (you populate with your data) -->
-<section class="team-section">
-  <div class="team-title">Example Team</div>
-  <div class="team-cards">
-    <div class="team-card">
-      <img src="placeholder.png" alt="">
-      <h3>Example Member</h3>
-      <p class="desc">Description about this member and their role.</p>
-    </div>
+<!-- TEAMS GRID -->
+<div id="team-container">
+
+  <div class="team-card">
+    <img src="police.png" alt="Police">
+    <h3>Police</h3>
+    <p>Protect the streets, respond to emergencies, and uphold the law.</p>
   </div>
-</section>
+
+  <div class="team-card">
+    <img src="fire.png" alt="Fire & Rescue">
+    <h3>Fire & Rescue</h3>
+    <p>Save lives, tackle fires, and handle rescue operations.</p>
+  </div>
+
+  <div class="team-card">
+    <img src="medical.png" alt="Medical">
+    <h3>Medical</h3>
+    <p>Provide lifesaving care as part of Oxford’s emergency response.</p>
+  </div>
+
+  <div class="team-card">
+    <img src="highways.png" alt="Highways">
+    <h3>Highways</h3>
+    <p>Manage traffic, repair road hazards, and keep Oxford moving.</p>
+  </div>
+
+</div>
 
 <!-- FOOTER -->
 <footer>
@@ -237,7 +243,6 @@ window.addEventListener("DOMContentLoaded", () => {
   const toggle = document.getElementById("darkToggle");
   const body = document.body;
 
-  // Load saved theme
   if (localStorage.getItem("darkMode") === "true") {
     body.classList.add("dark");
     toggle.classList.add("active");
