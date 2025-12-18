@@ -1,325 +1,255 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Oxford Response — Our Team</title>
-  <link rel="icon" href="favicon.png" type="image/png">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>Oxford Response — Teams</title>
+<link rel="icon" href="favicon.png" type="image/png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Lucide Icons -->
-  <script src="https://unpkg.com/lucide@latest" defer></script>
+<!-- Lucide Icons -->
+<script src="https://unpkg.com/lucide@latest" defer></script>
 
-  <style>
-    :root {
-      --bg: #ffffff;
-      --text: #1a1a1a;
-      --card-bg: #f5f7fb;
-      --nav-bg: #ffffff;
-      --footer-bg: #f5f7fb;
-      --border: #e6e6e6;
-      --icon-filter: invert(0);
-    }
+<style>
+body {
+  margin: 0;
+  background: #fff;
+  color: #000;
+  font-family: Arial, sans-serif;
+  transition: background 0.3s, color 0.3s;
+}
 
-    /* Dark mode colors matching home page */
-    body.dark {
-      --bg: #0d0d0d;
-      --text: #eaeaea;
-      --card-bg: #141414;
-      --nav-bg: #111;
-      --footer-bg: #111;
-      --border: #222;
-      --icon-filter: invert(1) brightness(1.2);
-    }
+/* Dark mode */
+body.dark {
+  background: #1a1a1a;
+  color: #e2e2e2;
+}
 
-    body {
-      font-family: Arial, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      margin: 0;
-      text-align: center;
-      transition: background 0.3s, color 0.3s;
-    }
+/* NAVBAR */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: #ffffff;
+  border-bottom: 1px solid #e6e6e6;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.07);
+  transition: background 0.3s, color 0.3s;
+}
+body.dark nav {
+  background: #111;
+  border-color: #333;
+}
 
-    img.logo {
-      filter: var(--icon-filter);
-      transition: filter 0.3s;
-    }
+nav img {
+  height: 32px;
+}
 
-    /* Navbar */
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 2rem;
-      background: var(--nav-bg);
-      border-bottom: 1px solid var(--border);
-      box-shadow: 0 8px 32px rgba(0,0,0,0.07);
-      transition: background 0.3s, color 0.3s;
-    }
+nav a {
+  color: #000;
+  text-decoration: none;
+  margin-left: 1.25rem;
+  font-weight: 500;
+}
+body.dark nav a {
+  color: #e2e2e2;
+}
 
-    nav img { height: 32px; }
-    nav a {
-      color: var(--text);
-      margin-left: 1.25rem;
-      text-decoration: none;
-      font-weight: 500;
-    }
-    nav a:hover { color: #1f4fff; }
+nav a:hover {
+  color: #2f4fff;
+}
 
-    /* Header */
-    header {
-      padding: 3rem 1.5rem 2rem;
-    }
+/* HEADER */
+header {
+  text-align: center;
+  padding: 3rem 1rem 2rem;
+}
 
-    header h2 { margin-bottom: 0.5rem; }
-    header p {
-      color: #555;
-      max-width: 600px;
-      margin: 0 auto;
-      line-height: 1.5;
-    }
-    body.dark header p { color: #ccc; }
+header h2 {
+  margin-bottom: 0.5rem;
+}
 
-    /* Team grid */
-    .team-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 2rem;
-      max-width: 1000px;
-      margin: 2rem auto;
-    }
+header p {
+  max-width: 600px;
+  margin: auto;
+  color: #666;
+}
+body.dark header p {
+  color: #bbb;
+}
 
-    /* Team card styles */
-    .team-card {
-      background: var(--card-bg);
-      border-radius: 16px;
-      padding: 1.5rem 1rem 2rem;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      transition: background 0.3s, color 0.3s, transform 0.3s, box-shadow 0.3s;
-    }
+/* TEAM SECTIONS */
+.team-section {
+  max-width: 1000px;
+  margin: 2rem auto 4rem;
+  padding: 0 1rem;
+}
 
-    .team-card:hover {
-      transform: scale(1.05);
-      box-shadow: 0 12px 35px rgba(0,0,0,0.15);
-    }
+.team-title {
+  text-align: center;
+  font-size: 1.6rem;
+  margin-bottom: 1.5rem;
+  letter-spacing: 1px;
+}
 
-    .team-card img {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      margin-bottom: 1rem;
-    }
+.team-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
 
-    .team-card h3 {
-      margin: 0.25rem 0;
-      font-size: 1.1rem;
-      letter-spacing: 1px;
-    }
+/* TEAM CARD */
+.team-card {
+  background: #f5f7fb;
+  border-radius: 16px;
+  padding: 1.5rem 1rem 2rem;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  transition: background 0.3s, color 0.3s;
+}
+body.dark .team-card {
+  background: #222;
+  color: #ddd;
+}
 
-    .team-card span.role {
-      font-size: 0.8rem;
-      color: #888;
-      letter-spacing: 1px;
-      margin-bottom: 0.5rem;
-      display: block;
-    }
-    body.dark .team-card span.role { color: #ccc; }
+.team-card img {
+  width: 85px;
+  height: 85px;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+}
 
-    .team-card p {
-      font-size: 0.85rem;
-      color: #555;
-      line-height: 1.3;
-    }
-    body.dark .team-card p { color: #ccc; }
+.team-card h3 {
+  margin: 0.5rem 0;
+  font-size: 1.2rem;
+}
 
-    /* Footer */
-    footer {
-      text-align: center;
-      padding: 2rem;
-      background: var(--footer-bg);
-      position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+.team-card .desc {
+  font-size: 0.9rem;
+  color: #555;
+  max-width: 260px;
+  margin: auto;
+}
+body.dark .team-card .desc {
+  color: #bbb;
+}
 
-    footer .footer-text {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-    }
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 2rem;
+  background: #f5f7fb;
+  position: relative;
+  transition: background 0.3s;
+}
+body.dark footer {
+  background: #111;
+  color: #ccc;
+}
 
-    /* Dark mode toggle */
-    .theme-toggle {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-left: auto;
-    }
+/* DARK MODE TOGGLE */
+.toggle-container {
+  position: absolute;
+  right: 1.25rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
 
-    .toggle-switch {
-      width: 52px;
-      height: 28px;
-      background: #ccc;
-      border-radius: 50px;
-      position: relative;
-      cursor: pointer;
-      transition: background 0.25s;
-    }
+.toggle-slider {
+  width: 50px;
+  height: 24px;
+  background: #ccc;
+  border-radius: 12px;
+  cursor: pointer;
+  position: relative;
+}
 
-    .toggle-switch .thumb {
-      width: 24px;
-      height: 24px;
-      background: white;
-      border-radius: 50%;
-      position: absolute;
-      top: 2px;
-      left: 2px;
-      transition: left 0.25s;
-    }
+.toggle-slider::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  background: #fff;
+  border-radius: 50%;
+  transition: left 0.3s;
+}
 
-    body.dark .toggle-switch { background: #34c759; }
-    body.dark .toggle-switch .thumb { left: 26px; }
-  </style>
+/* Slider active (dark mode ON) */
+.toggle-slider.active {
+  background: #444;
+}
+.toggle-slider.active::after {
+  left: 28px;
+}
+</style>
 </head>
 
 <body>
-  <nav>
-    <div><img src="logo.svg" class="logo" alt="Oxford Response Logo"></div>
-    <div>
-      <a href="index.html">Home</a>
-      <a href="teams.html">Teams</a>
-      <a href="story.html">Story</a>
-      <a href="roleplay.html">Roleplay</a>
-      <a href="staff.html">Our Team</a>
-    </div>
-  </nav>
 
-  <header>
-    <h2>Our Team</h2>
-    <p>Meet the Oxford Response staff.</p>
-  </header>
+<!-- NAV -->
+<nav>
+  <div><img src="logo.svg" alt="Logo"></div>
+  <div>
+    <a href="index.html">Home</a>
+    <a href="teams.html">Teams</a>
+    <a href="story.html">Story</a>
+    <a href="roleplay.html">Roleplay</a>
+    <a href="staff.html">Our Team</a>
+  </div>
+</nav>
 
-  <section class="team-grid">
-    <!-- Oxford Team -->
-    <div class="team-card">
-      <img src="Neo.png" alt="Neo">
-      <h3>Neo</h3>
-      <span class="role">Oxford Team</span>
-      <p>Co-founder, co-owner and developer of OX:RE.</p>
-    </div>
-    <div class="team-card">
-      <img src="Kam.png" alt="Kam">
-      <h3>Kam</h3>
-      <span class="role">Oxford Team</span>
-      <p>Co-founder, co-owner and developer of OX:RE.</p>
-    </div>
+<!-- HEADER -->
+<header>
+  <h2>Teams</h2>
+  <p>View all Oxford Response teams and their structure.</p>
+</header>
 
-    <!-- Administration -->
+<!-- SECTION EXAMPLE (you populate with your data) -->
+<section class="team-section">
+  <div class="team-title">Example Team</div>
+  <div class="team-cards">
     <div class="team-card">
-      <img src="Omitser.png" alt="Omitser">
-      <h3>omitser</h3>
-      <span class="role">Administration</span>
-      <p>Oversees the moderation team, reports to the founders.</p>
+      <img src="placeholder.png" alt="">
+      <h3>Example Member</h3>
+      <p class="desc">Description about this member and their role.</p>
     </div>
+  </div>
+</section>
 
-    <!-- Contributors -->
-    <div class="team-card">
-      <img src="C_ommando.png" alt="C_ommando">
-      <h3>C_0MMANDO</h3>
-      <span class="role">Contributor</span>
-      <p>Cosmetics modeller for OX:RE, a vital role in the development of OX:RE.</p>
-    </div>
-    <div class="team-card">
-      <img src="Rezqyb.png" alt="Rezqyb">
-      <h3>rezqyb</h3>
-      <span class="role">Contributor</span>
-      <p>Vehicle modeller, a vital role in the development of OX:RE.</p>
-    </div>
+<!-- FOOTER -->
+<footer>
+  Oxford Response · Roblox
+  <div class="toggle-container">
+    <i data-lucide="sun"></i>
+    <div class="toggle-slider" id="darkToggle"></div>
+    <i data-lucide="moon"></i>
+  </div>
+</footer>
 
-    <!-- Mods -->
-    <div class="team-card">
-      <img src="Elkkuu007.png" alt="Elkkuu007">
-      <h3>elkkuu007</h3>
-      <span class="role">Moderator</span>
-      <p>Trained individual tasked with safeguarding the community.</p>
-    </div>
-    <div class="team-card">
-      <img src="24vmarti.png" alt="24vmarti">
-      <h3>24vmarti</h3>
-      <span class="role">Moderator</span>
-      <p>Trained individual tasked with safeguarding the community.</p>
-    </div>
-    <div class="team-card">
-      <img src="Senpai_mangue.png" alt="Senpai_mangue">
-      <h3>Senpai_Mangue</h3>
-      <span class="role">Moderator</span>
-      <p>Trained individual tasked with safeguarding the community.</p>
-    </div>
-    <div class="team-card">
-      <img src="Spec1fic.jpg" alt="Spec1fic">
-      <h3>Spec1fic</h3>
-      <span class="role">Moderator</span>
-      <p>Trained individual tasked with safeguarding the community.</p>
-    </div>
-    <div class="team-card">
-      <img src="Rerfah.png" alt="Rerfah">
-      <h3>rerfah</h3>
-      <span class="role">Moderator</span>
-      <p>Trained individual tasked with safeguarding the community.</p>
-    </div>
+<script>
+window.addEventListener("DOMContentLoaded", () => {
+  lucide.createIcons();
 
-    <!-- Trial Mods -->
-    <div class="team-card">
-      <img src="Void.png" alt="Void">
-      <h3>Void</h3>
-      <span class="role">Trial Moderator</span>
-      <p>Individual undergoing training to support community safeguarding.</p>
-    </div>
-    <div class="team-card">
-      <img src="Tycoonmoom.png" alt="Tycoonmoom">
-      <h3>Tycoonmoom</h3>
-      <span class="role">Trial Moderator</span>
-      <p>Individual undergoing training to support community safeguarding.</p>
-    </div>
-    <div class="team-card">
-      <img src="Warriorcrye.png" alt="Warriorcrye">
-      <h3>warriorcrye</h3>
-      <span class="role">Trial Moderator</span>
-      <p>Individual undergoing training to support community safeguarding.</p>
-    </div>
-  </section>
+  const toggle = document.getElementById("darkToggle");
+  const body = document.body;
 
-  <footer>
-    <span class="footer-text">Oxford Response · Roblox</span>
+  // Load saved theme
+  if (localStorage.getItem("darkMode") === "true") {
+    body.classList.add("dark");
+    toggle.classList.add("active");
+  }
 
-    <div class="theme-toggle">
-      <i data-lucide="sun"></i>
-      <div class="toggle-switch" id="themeSwitch">
-        <div class="thumb"></div>
-      </div>
-      <i data-lucide="moon"></i>
-    </div>
-  </footer>
+  toggle.addEventListener("click", () => {
+    body.classList.toggle("dark");
+    toggle.classList.toggle("active");
+    localStorage.setItem("darkMode", body.classList.contains("dark"));
+  });
+});
+</script>
 
-  <script>
-    // Dark mode toggle
-    if (localStorage.getItem("theme") === "dark") document.body.classList.add("dark");
-    const toggle = document.getElementById("themeSwitch");
-    toggle.addEventListener("click", () => {
-      document.body.classList.toggle("dark");
-      localStorage.setItem(
-        "theme",
-        document.body.classList.contains("dark") ? "dark" : "light"
-      );
-    });
-
-    // Lucide icons
-    window.addEventListener("DOMContentLoaded", () => { lucide.createIcons(); });
-  </script>
 </body>
 </html>
