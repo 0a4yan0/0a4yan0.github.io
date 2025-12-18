@@ -10,7 +10,6 @@
   <script src="https://unpkg.com/lucide@latest" defer></script>
 
   <style>
-    /* -------------------- THEME VARIABLES -------------------- */
     :root {
       --bg: #ffffff;
       --text: #1a1a1a;
@@ -110,7 +109,6 @@
     .online { color: #28a745; }
     .offline { color: #dc3545; }
 
-    /* -------------------- FOOTER -------------------- */
     footer {
       display: flex;
       justify-content: center;
@@ -163,7 +161,7 @@
 
     /* -------------------- COINS -------------------- */
     .coin {
-      position: fixed;
+      position: absolute; /* move with page */
       width: 48px;
       height: 48px;
       background: url('coin.png') no-repeat center/contain;
@@ -254,20 +252,22 @@
     updateStats();
     setInterval(updateStats, 15000);
 
-    // -------------------- Get Rich Burst (Emerging from Image) --------------------
+    // -------------------- Get Rich Burst --------------------
     const getRich = document.getElementById("getRich");
     getRich.addEventListener("click", () => {
       const rect = getRich.getBoundingClientRect();
+      const scrollTop = window.scrollY;
+      const scrollLeft = window.scrollX;
 
       for (let i = 0; i < 20; i++) {
         const coin = document.createElement("div");
         coin.classList.add("coin");
 
-        const startX = rect.left + rect.width / 2;
-        const startY = rect.top;
+        const startX = rect.left + rect.width / 2 + scrollLeft;
+        const startY = rect.top + scrollTop;
         coin.style.left = startX + "px";
         coin.style.top = startY + "px";
-        coin.style.zIndex = 0; // start behind image
+        coin.style.zIndex = 0;
 
         document.body.appendChild(coin);
 
@@ -288,7 +288,6 @@
           posY += velocityY;
           rotation += rotationSpeed;
 
-          // Switch z-index to go over the image after rising a bit
           if(posY - startY < -30) coin.style.zIndex = 10000;
 
           coin.style.transform = `translate(${posX - startX}px, ${posY - startY}px) rotate(${rotation}deg)`;
