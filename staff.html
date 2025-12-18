@@ -1,1 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Oxford Response — Our Team</title>
+  <link rel="icon" href="favicon.png" type="image/png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest" defer></script>
+
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #1a1a1a;
+      --card-bg: #ffffff;
+      --nav-bg: #ffffff;
+      --footer-bg: #f5f7fb;
+      --border: #e6e6e6;
+      --icon-filter: invert(0);
+    }
+
+    body.dark {
+      --bg: #0d0d0d;
+      --text: #eaeaea;
+      --card-bg: #141414;
+      --nav-bg: #111;
+      --footer-bg: #111;
+      --border: #222;
+      --icon-filter: invert(1) brightness(1.2);
+    }
+
+    html, body {
+      overflow-x: hidden;
+      font-family: Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      text-align: center;
+      margin: 0;
+      line-height: 1.6;
+      transition: background 0.25s, color 0.25s;
+    }
+
+    img.logo { filter: var(--icon-filter); transition: filter 0.3s; }
+
+    nav {
+      position: sticky;
+      top: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      z-index: 9999;
+      background: var(--nav-bg);
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.07);
+      transition: background 0.3s, border 0.3s;
+    }
+
+    nav img { height: 32px; }
+    nav a {
+      color: var(--text);
+      margin-left: 1.2rem;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    nav a:hover { color: #1f4fff; }
+
+    header {
+      padding: 3rem 1.5rem 1rem;
+      background: var(--footer-bg);
+      transition: background 0.3s;
+    }
+
+    .small-logo { height: 70px; margin: 0 auto 1.5rem; display: block; }
+    h2 { margin-bottom: 1rem; }
+
+    .subheading {
+      margin-top: 1rem;
+      font-size: 1rem;
+      color: #555;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.5;
+    }
+
+    .teams-container { max-width: 1100px; margin: 0 auto; padding: 3rem 1.5rem; }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .team-card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 1.5rem;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+      cursor: default;
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .team-card h4 { margin: 0.5rem 0; }
+
+    footer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      padding: 2rem;
+      background: var(--footer-bg);
+      color: var(--text);
+      font-size: 1rem;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    footer .footer-text {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .theme-toggle {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-left: auto;
+    }
+
+    .toggle-switch {
+      width: 52px;
+      height: 28px;
+      background: #ccc;
+      border-radius: 50px;
+      position: relative;
+      cursor: pointer;
+      transition: background 0.25s;
+    }
+
+    .toggle-switch .thumb {
+      width: 24px;
+      height: 24px;
+      background: white;
+      border-radius: 50%;
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      transition: left 0.25s;
+    }
+
+    body.dark .toggle-switch { background: #34c759; }
+    body.dark .toggle-switch .thumb { left: 26px; }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <div><img src="logo.svg" class="logo" alt="Oxford Response Logo"></div>
+    <div>
+      <a href="index.html">Home</a>
+      <a href="teams.html">Teams</a>
+      <a href="story.html">Story</a>
+      <a href="roleplay.html">Roleplay</a>
+      <a href="staff.html">Our Team</a>
+    </div>
+  </nav>
+
+  <header>
+    <img src="logo.svg" class="small-logo" alt="Oxford Response">
+    <h2>Our Team</h2>
+    <p class="subheading">
+      Meet the people keeping Oxford Response running smoothly.<br>
+      From leadership to trial moderators, every role matters.
+    </p>
+  </header>
+
+  <section class="teams-container">
+    <!-- Oxford Team -->
+    <h3>Oxford Team</h3>
+    <div class="team-grid">
+      <div class="team-card"><h4>Neo</h4></div>
+      <div class="team-card"><h4>Kam</h4></div>
+    </div>
+
+    <!-- Administration -->
+    <h3>Administration</h3>
+    <div class="team-grid">
+      <div class="team-card"><h4>Omitser</h4></div>
+    </div>
+
+    <!-- Contributor -->
+    <h3>Contributor</h3>
+    <div class="team-grid">
+      <div class="team-card"><h4>C_ommando</h4></div>
+      <div class="team-card"><h4>Rezqyb</h4></div>
+    </div>
+
+    <!-- Moderator -->
+    <h3>Moderator</h3>
+    <div class="team-grid">
+      <div class="team-card"><h4>Elkkuu007</h4></div>
+      <div class="team-card"><h4>24vmarti</h4></div>
+      <div class="team-card"><h4>Senpai_Mangue</h4></div>
+      <div class="team-card"><h4>Spec1fic</h4></div>
+      <div class="team-card"><h4>Rerfah</h4></div>
+    </div>
+
+    <!-- Trial Moderator -->
+    <h3>Trial Moderator</h3>
+    <div class="team-grid">
+      <div class="team-card"><h4>Void</h4></div>
+      <div class="team-card"><h4>Tycoonmoom</h4></div>
+      <div class="team-card"><h4>Warriorcrye</h4></div>
+    </div>
+  </section>
+
+  <footer>
+    <span class="footer-text">Oxford Response · Roblox</span>
+    <div class="theme-toggle">
+      <i data-lucide="sun"></i>
+      <div class="toggle-switch" id="themeSwitch"><div class="thumb"></div></div>
+      <i data-lucide="moon"></i>
+    </div>
+  </footer>
+
+  <script>
+    // -------------------- Dark Mode --------------------
+    if (localStorage.getItem("theme") === "dark") document.body.classList.add("dark");
+
+    const toggle = document.getElementById("themeSwitch");
+    toggle.addEventListener("click", () => {
+      document.body.classList.toggle("dark");
+      localStorage.setItem("theme", document.body.classList.contains("dark") ? "dark" : "light");
+    });
+
+    // -------------------- Lucide Icons --------------------
+    window.addEventListener("DOMContentLoaded", () => { lucide.createIcons(); });
+  </script>
+</body>
+</html>
 
