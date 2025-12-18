@@ -184,15 +184,23 @@
       height: 32px;
       background: url('coin.png') no-repeat center/contain;
       pointer-events: none;
-      animation: fall 1s linear forwards;
       z-index: 9999;
+      animation: fall 1s forwards;
     }
 
     @keyframes fall {
-      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-      100% { transform: translateY(500px) rotate(360deg); opacity: 0; }
+      0% {
+        transform: translate(0, 0) rotate(0deg) scale(1);
+        opacity: 1;
+      }
+      50% {
+        transform: translate(var(--x-move, 0px), 250px) rotate(180deg) scale(1.2);
+      }
+      100% {
+        transform: translate(var(--x-move, 0px), 500px) rotate(360deg) scale(0.8);
+        opacity: 0;
+      }
     }
-
   </style>
 </head>
 
@@ -288,16 +296,26 @@
     // -------------------- Get Rich Easter Egg --------------------
     const getRich = document.getElementById("getRich");
     getRich.addEventListener("click", () => {
-      for (let i = 0; i < 10; i++) {
+      const rect = getRich.getBoundingClientRect();
+
+      for (let i = 0; i < 15; i++) {
         const coin = document.createElement("div");
         coin.classList.add("coin");
-        coin.style.left = (getRich.offsetLeft + Math.random() * getRich.offsetWidth) + "px";
-        coin.style.top = (getRich.offsetTop) + "px";
+
+        // Random start near image
+        const startX = rect.left + Math.random() * rect.width;
+        const startY = rect.top + Math.random() * rect.height / 2;
+        coin.style.left = startX + "px";
+        coin.style.top = startY + "px";
+
+        // Random horizontal movement
+        const xMove = (Math.random() - 0.5) * 200; // -100px to +100px
+        coin.style.setProperty("--x-move", xMove + "px");
+
         document.body.appendChild(coin);
-        setTimeout(() => coin.remove(), 1000);
+        setTimeout(() => coin.remove(), 1200);
       }
     });
-
   </script>
 </body>
 </html>
