@@ -87,9 +87,10 @@
 
     .teams-container { max-width: 1100px; margin: 0 auto; padding: 3rem 1.5rem; }
 
+    /* Equal-width grid cards */
     .team-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* equal width cards */
+      grid-template-columns: repeat(4, 1fr); /* Always 4 equal columns */
       gap: 1.5rem;
       margin-bottom: 2rem;
     }
@@ -158,6 +159,9 @@
 
     body.dark .toggle-switch { background: #34c759; }
     body.dark .toggle-switch .thumb { left: 26px; }
+    
+    @media (max-width: 1024px) { .team-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px) { .team-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
 
@@ -188,12 +192,17 @@
     <div class="team-grid">
       <div class="team-card"><h4>Neo</h4></div>
       <div class="team-card"><h4>Kam</h4></div>
+      <div class="team-card"></div>
+      <div class="team-card"></div>
     </div>
 
     <!-- Administration -->
     <h3>Administration</h3>
     <div class="team-grid">
       <div class="team-card"><h4>Omitser</h4></div>
+      <div class="team-card"></div>
+      <div class="team-card"></div>
+      <div class="team-card"></div>
     </div>
 
     <!-- Contributor -->
@@ -201,6 +210,8 @@
     <div class="team-grid">
       <div class="team-card"><h4>C_ommando</h4></div>
       <div class="team-card"><h4>Rezqyb</h4></div>
+      <div class="team-card"></div>
+      <div class="team-card"></div>
     </div>
 
     <!-- Moderator -->
@@ -219,6 +230,7 @@
       <div class="team-card"><h4>Void</h4></div>
       <div class="team-card"><h4>Tycoonmoom</h4></div>
       <div class="team-card"><h4>Warriorcrye</h4></div>
+      <div class="team-card"></div>
     </div>
   </section>
 
