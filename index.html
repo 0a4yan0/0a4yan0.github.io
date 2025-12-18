@@ -50,7 +50,7 @@
       justify-content: space-between;
       align-items: center;
       padding: 1rem 2rem;
-      z-index: 10000; /* on top of coins */
+      z-index: 10000;
       background: var(--nav-bg);
       border-bottom: 1px solid var(--border);
       box-shadow: 0 8px 32px rgba(0,0,0,0.08);
@@ -275,12 +275,14 @@
 
         document.body.appendChild(coin);
 
-        // Symmetric burst: evenly left and right
-        const angle = (Math.random() - 0.5) * Math.PI; // -π/2 to π/2
+        // Angle: small upward arc, half left, half right
+        let angle = Math.random() * Math.PI / 4; // 0 to 45 degrees
+        if (Math.random() < 0.5) angle *= -1; // flip left half
         const speed = Math.random() * 8 + 6;
+
         let posX = startX, posY = startY;
-        let velocityX = Math.cos(angle) * speed;
-        let velocityY = Math.sin(angle) * speed;
+        let velocityX = Math.sin(angle) * speed;
+        let velocityY = -Math.cos(angle) * speed; // go up
         const gravity = 0.5;
         const rotationSpeed = Math.random() * 20 - 10;
         let rotation = 0;
