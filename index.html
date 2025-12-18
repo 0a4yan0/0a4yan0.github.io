@@ -6,16 +6,49 @@
   <link rel="icon" href="favicon.png" type="image/png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest" defer></script>
+
   <style>
-    body { 
-      font-family: Arial, sans-serif; 
-      background-color: #ffffff; 
-      color: #1a1a1a; 
-      text-align: center; 
-      margin: 0; 
-      line-height: 1.6; 
+
+    /* -------------------- THEME VARIABLES -------------------- */
+    :root {
+      --bg: #ffffff;
+      --text: #1a1a1a;
+      --card-bg: #ffffff;
+      --nav-bg: #ffffff;
+      --footer-bg: #f5f7fb;
+      --border: #e6e6e6;
+      --icon-filter: invert(0);
     }
 
+    body.dark {
+      --bg: #0d0d0d;
+      --text: #eaeaea;
+      --card-bg: #141414;
+      --nav-bg: #111;
+      --footer-bg: #111;
+      --border: #222;
+      --icon-filter: invert(1) brightness(1.2);
+    }
+
+    /* -------------------- GLOBAL -------------------- */
+    body { 
+      font-family: Arial, sans-serif; 
+      background-color: var(--bg);
+      color: var(--text);
+      text-align: center;
+      margin: 0;
+      line-height: 1.6;
+      transition: background 0.25s, color 0.25s;
+    }
+
+    img.logo {
+      filter: var(--icon-filter);
+      transition: filter 0.3s;
+    }
+
+    /* -------------------- NAV -------------------- */
     nav {
       position: sticky;
       top: 0;
@@ -24,38 +57,36 @@
       align-items: center;
       padding: 1rem 2rem;
       z-index: 10;
-      background: #ffffff;
-      border-bottom: 1px solid #e6e6e6;
+      background: var(--nav-bg);
+      border-bottom: 1px solid var(--border);
       box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+      transition: background 0.3s, border 0.3s;
     }
 
-    nav img { height: 32px; }
-
     nav a {
-      color: #1a1a1a;
+      color: var(--text);
       margin-left: 1.25rem;
       text-decoration: none;
       font-weight: 500;
-      cursor: pointer;
     }
-
     nav a:hover { color: #1f4fff; }
 
+    nav img { height: 32px; }
+
+    /* -------------------- HEADER -------------------- */
     header {
       padding: 5rem 1.5rem 4rem;
-      background: #f5f7fb;
+      background: var(--footer-bg);
+      transition: background 0.3s;
     }
 
-    header img {
-      height: 120px;
-      margin-bottom: 1rem;
-    }
+    header img { height: 120px; margin-bottom: 1rem; }
 
     header p {
       max-width: 720px;
       margin: 0 auto;
       font-size: 1.05rem;
-      color: #444;
+      color: var(--text);
     }
 
     section {
@@ -66,6 +97,7 @@
 
     h2 { margin-bottom: 2rem; }
 
+    /* -------------------- FEATURES -------------------- */
     .features {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -77,7 +109,10 @@
       border-radius: 18px;
       box-shadow: 0 12px 30px rgba(0,0,0,0.12);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
-      cursor: pointer;
+    }
+
+    body.dark .feature img {
+      box-shadow: 0 12px 30px rgba(255,255,255,0.06);
     }
 
     .feature img:hover {
@@ -85,11 +120,13 @@
       box-shadow: 0 16px 40px rgba(0,0,0,0.18);
     }
 
+    /* -------------------- CARD / STATS -------------------- */
     .card {
-      background: #ffffff;
+      background: var(--card-bg);
       border-radius: 18px;
       padding: 2rem;
       box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+      transition: background 0.3s, box-shadow 0.3s;
     }
 
     .stats {
@@ -104,28 +141,69 @@
       color: #1f4fff;
     }
 
-    .stat p { margin-top: 0.25rem; color: #555; }
+    .stat p { color: var(--text); }
 
     .online { color: #28a745; }
     .offline { color: #dc3545; }
 
+    /* -------------------- FOOTER -------------------- */
     footer {
       text-align: center;
       padding: 2rem;
-      background: #f5f7fb;
-      color: #1a1a1a;
-      font-size: 1rem; /* Updated to match teams page */
+      background: var(--footer-bg);
+      color: var(--text);
+      font-size: 1rem;
+      margin-top: 2rem;
+      transition: background 0.3s, color 0.3s;
     }
+
+    /* -------------------- DARK MODE SLIDER -------------------- */
+    .theme-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 1rem;
+    }
+
+    .toggle-switch {
+      width: 52px;
+      height: 28px;
+      background: #ccc;
+      border-radius: 50px;
+      position: relative;
+      cursor: pointer;
+      transition: background 0.25s;
+    }
+
+    .toggle-switch .thumb {
+      width: 24px;
+      height: 24px;
+      background: white;
+      border-radius: 50%;
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      transition: left 0.25s;
+    }
+
+    body.dark .toggle-switch {
+      background: #34c759; /* iOS green */
+    }
+
+    body.dark .toggle-switch .thumb {
+      left: 26px;
+    }
+
   </style>
 </head>
 
 <body>
-  <div id="top"></div>
 
   <nav>
-    <div><img src="logo.svg" alt="Oxford Response Logo"></div>
+    <div><img src="logo.svg" class="logo" alt="Oxford Response Logo"></div>
     <div>
-      <a href="#top">Home</a>
+      <a href="index.html">Home</a>
       <a href="teams.html">Teams</a>
       <a href="story.html">Story</a>
       <a href="roleplay.html">Roleplay</a>
@@ -134,20 +212,19 @@
   </nav>
 
   <header>
-    <img src="logo.svg" alt="Oxford Response Logo">
+    <img src="logo.svg" class="logo" alt="Oxford Response Logo">
     <p>
       Enforce the law, challenge it or save lives — inside Oxford Response.<br><br>
-      Oxford Response is an Emergency Response roleplay experience based in Oxford,
-      England, UK.
+      Oxford Response is an Emergency Response roleplay experience based in Oxford, England, UK.
     </p>
   </header>
 
   <section>
     <h2>Choose Your Path</h2>
     <div class="features">
-      <div class="feature"><img src="fight-crime.webp" alt="Fight Crime"></div>
-      <div class="feature"><img src="save-lives.webp" alt="Save Lives"></div>
-      <div class="feature"><img src="get-rich.webp" alt="Get Rich"></div>
+      <div class="feature"><img src="fight-crime.webp" alt=""></div>
+      <div class="feature"><img src="save-lives.webp" alt=""></div>
+      <div class="feature"><img src="get-rich.webp" alt=""></div>
     </div>
   </section>
 
@@ -161,39 +238,65 @@
     </div>
   </section>
 
-  <footer>Oxford Response · Roblox</footer>
+  <footer>
+    Oxford Response · Roblox
+
+    <div class="theme-toggle">
+      <i data-lucide="sun"></i>
+
+      <div class="toggle-switch" id="themeSwitch">
+        <div class="thumb"></div>
+      </div>
+
+      <i data-lucide="moon"></i>
+    </div>
+  </footer>
 
   <script>
-    // Robust stats fetch
+    // Load saved theme
+    if (localStorage.getItem("theme") === "dark") {
+      document.body.classList.add("dark");
+    }
+
+    // Toggle button
+    const toggle = document.getElementById("themeSwitch");
+    toggle.addEventListener("click", () => {
+      document.body.classList.toggle("dark");
+      localStorage.setItem("theme",
+        document.body.classList.contains("dark") ? "dark" : "light"
+      );
+    });
+
+    // Stats fetch
     async function updateStats() {
       try {
         const res = await fetch("https://oxford-response-stats.aayan-sb.workers.dev");
         const json = await res.json();
         const g = json?.data?.[0];
 
-        if (!g) throw new Error("No data");
+        if (!g) throw new Error();
 
-        const visits = g.visits ?? g.visitCount ?? 0;
-        const playing = g.playing ?? 0;
-        const favorites = g.favoritedCount ?? g.favoritesCount ?? 0;
+        document.getElementById("visits").textContent = (g.visits ?? g.visitCount ?? 0).toLocaleString();
+        document.getElementById("playing").textContent = (g.playing ?? 0).toLocaleString();
+        document.getElementById("favorites").textContent = (g.favoritesCount ?? 0).toLocaleString();
 
-        document.getElementById("visits").textContent = visits.toLocaleString();
-        document.getElementById("playing").textContent = playing.toLocaleString();
-        document.getElementById("favorites").textContent = favorites.toLocaleString();
-
-        const status = document.getElementById("status");
-        status.textContent = playing > 0 ? "Online" : "Offline";
-        status.className = playing > 0 ? "online" : "offline";
+        const online = g.playing > 0;
+        document.getElementById("status").textContent = online ? "Online" : "Offline";
+        document.getElementById("status").className = online ? "online" : "offline";
 
       } catch {
-        ["visits","playing","favorites","status"].forEach(id => {
-          document.getElementById(id).textContent = "N/A";
-        });
+        ["visits","playing","favorites","status"].forEach(id => document.getElementById(id).textContent = "N/A");
       }
     }
 
     updateStats();
     setInterval(updateStats, 15000);
+
+    // Icons
+    window.addEventListener("DOMContentLoaded", () => {
+      lucide.createIcons();
+    });
   </script>
+
 </body>
 </html>
