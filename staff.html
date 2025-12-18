@@ -18,6 +18,7 @@
   --footer-bg: #f5f7fb;
   --border: #e6e6e6;
   --icon-filter: invert(0);
+  --founder-red: #ff3b30;
 }
 
 body.dark {
@@ -28,6 +29,7 @@ body.dark {
   --footer-bg: #111;
   --border: #333;
   --icon-filter: invert(1) brightness(1.2);
+  --founder-red: #ff453a;
 }
 
 body {
@@ -84,7 +86,6 @@ body.dark header p { color: #ccc; }
   margin: 2rem auto;
 }
 
-/* Team card styles with hover scale effect */
 .team-card {
   background: var(--card-bg);
   border-radius: 16px;
@@ -102,6 +103,10 @@ body.dark header p { color: #ccc; }
   box-shadow: 0 12px 35px rgba(0,0,0,0.15);
 }
 
+.team-card.founder {
+  border: 2px solid var(--founder-red);
+}
+
 .team-card img {
   width: 80px;
   height: 80px;
@@ -113,6 +118,20 @@ body.dark header p { color: #ccc; }
   margin: 0.25rem 0;
   font-size: 1.1rem;
   letter-spacing: 1px;
+}
+
+/* Founder Label */
+.founder-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  justify-content: center;
+}
+
+.founder-label .icon {
+  width: 16px;
+  height: 16px;
+  color: var(--founder-red);
 }
 
 .team-card span.role {
@@ -200,17 +219,25 @@ body.dark .toggle-switch .thumb { left: 26px; }
 </header>
 
 <section class="team-grid">
-  <!-- Oxford Team -->
-  <div class="team-card">
+
+  <!-- FOUNDERS -->
+  <div class="team-card founder">
     <img src="Neo.png" alt="Neo">
-    <h3>Neo</h3>
-    <span class="role">Oxford Team</span>
+    <h3 style="margin-left: -6px;">Neo</h3>
+    <span class="role founder-label" style="margin-left: -6px;">
+      Oxford Team
+      <i data-lucide="crown" class="icon"></i>
+    </span>
     <p>Co-founder, co-owner and developer of OX:RE.</p>
   </div>
-  <div class="team-card">
+
+  <div class="team-card founder">
     <img src="Kam.png" alt="Kam">
-    <h3>Kam</h3>
-    <span class="role">Oxford Team</span>
+    <h3 style="margin-left: -6px;">Kam</h3>
+    <span class="role founder-label" style="margin-left: -6px;">
+      Oxford Team
+      <i data-lucide="crown" class="icon"></i>
+    </span>
     <p>Co-founder, co-owner and developer of OX:RE.</p>
   </div>
 
@@ -229,6 +256,7 @@ body.dark .toggle-switch .thumb { left: 26px; }
     <span class="role">Contributor</span>
     <p>3D modeller for OX:RE, a vital role in the development of OX:RE.</p>
   </div>
+
   <div class="team-card">
     <img src="Rezqyb.png" alt="Rezqyb">
     <h3>rezqyb</h3>
@@ -243,24 +271,28 @@ body.dark .toggle-switch .thumb { left: 26px; }
     <span class="role">Moderator</span>
     <p>Trained individual tasked with safeguarding the community.</p>
   </div>
+
   <div class="team-card">
     <img src="24vmarti.png" alt="24vmarti">
     <h3>24vmarti</h3>
     <span class="role">Moderator</span>
     <p>Trained individual tasked with safeguarding the community.</p>
   </div>
+
   <div class="team-card">
     <img src="Senpai_mangue.png" alt="Senpai_mangue">
     <h3>Senpai_Mangue</h3>
     <span class="role">Moderator</span>
     <p>Trained individual tasked with safeguarding the community.</p>
   </div>
+
   <div class="team-card">
     <img src="Spec1fic.jpg" alt="Spec1fic">
     <h3>Spec1fic</h3>
     <span class="role">Moderator</span>
     <p>Trained individual tasked with safeguarding the community.</p>
   </div>
+
   <div class="team-card">
     <img src="Rerfah.png" alt="Rerfah">
     <h3>rerfah</h3>
@@ -275,18 +307,21 @@ body.dark .toggle-switch .thumb { left: 26px; }
     <span class="role">Trial Moderator</span>
     <p>Individual undergoing training to support community safeguarding.</p>
   </div>
+
   <div class="team-card">
     <img src="Tycoonmoom.png" alt="Tycoonmoom">
     <h3>Tycoonmoom</h3>
     <span class="role">Trial Moderator</span>
     <p>Individual undergoing training to support community safeguarding.</p>
   </div>
+
   <div class="team-card">
     <img src="Warriorcrye.png" alt="Warriorcrye">
     <h3>warriorcrye</h3>
     <span class="role">Trial Moderator</span>
     <p>Individual undergoing training to support community safeguarding.</p>
   </div>
+
 </section>
 
 <footer>
@@ -312,4 +347,3 @@ body.dark .toggle-switch .thumb { left: 26px; }
 </script>
 </body>
 </html>
-
