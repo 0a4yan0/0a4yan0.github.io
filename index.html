@@ -2,25 +2,21 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Tooly</title>
+  <title>Tooly – Dashboard</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- Inter font -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-
-  <!-- Lucide icons -->
-  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Icons -->
+  <link href="https://unpkg.com/feather-icons" rel="stylesheet">
 
   <style>
     :root {
-      --bg: #0f1115;
-      --panel: #161a20;
-      --panel-light: #1c2129;
-      --text: #e6e9ef;
-      --muted: #9aa1ac;
-      --blue: #4f8cff;
-      --orange: #ff9f43;
-      --border: #262b34;
+      --bg: #ffffff;
+      --sidebar: #f7f7f8;
+      --border: #e5e7eb;
+      --text: #0f172a;
+      --muted: #6b7280;
+      --card: #ffffff;
+      --input: #f3f4f6;
     }
 
     * {
@@ -29,193 +25,334 @@
 
     body {
       margin: 0;
-      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Inter, Helvetica, Arial, sans-serif;
       background: var(--bg);
       color: var(--text);
-      height: 100vh;
+    }
+
+    .app {
       display: flex;
+      height: 100vh;
+      width: 100%;
     }
 
     /* Sidebar */
     .sidebar {
       width: 260px;
-      background: var(--panel);
+      background: var(--sidebar);
       border-right: 1px solid var(--border);
-      padding: 20px;
       display: flex;
       flex-direction: column;
-      gap: 24px;
+      padding: 16px;
     }
 
-    .brand {
-      font-size: 20px;
+    .logo {
+      font-weight: 700;
+      font-size: 22px;
+      margin-bottom: 24px;
+    }
+
+    .nav-section {
+      margin-bottom: 24px;
+    }
+
+    .nav-title {
+      font-size: 12px;
       font-weight: 600;
-      letter-spacing: 0.2px;
-    }
-
-    .nav {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
+      color: var(--muted);
+      margin-bottom: 8px;
+      text-transform: uppercase;
     }
 
     .nav-item {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       padding: 10px 12px;
       border-radius: 8px;
-      color: var(--muted);
       cursor: pointer;
+      color: var(--text);
+      font-size: 14px;
     }
 
     .nav-item.active {
-      background: var(--panel-light);
-      color: var(--text);
+      background: #eaeaec;
     }
 
     .nav-item:hover {
-      background: var(--panel-light);
-      color: var(--text);
+      background: #ededf0;
+    }
+
+    .sidebar-footer {
+      margin-top: auto;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
     }
 
     /* Main */
     .main {
       flex: 1;
-      padding: 32px;
       display: flex;
       flex-direction: column;
-      gap: 24px;
     }
 
-    .header {
+    /* Top bar */
+    .topbar {
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-end;
       align-items: center;
+      padding: 16px 24px;
+      gap: 12px;
     }
 
-    .title {
-      font-size: 22px;
-      font-weight: 600;
-    }
-
-    .calculator {
-      background: var(--panel);
+    .top-btn {
+      padding: 8px 14px;
+      border-radius: 999px;
       border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 24px;
-      max-width: 420px;
-    }
-
-    .display {
-      background: #0b0d11;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 16px;
-      text-align: right;
-      font-size: 28px;
-      font-weight: 500;
-      margin-bottom: 16px;
-    }
-
-    .buttons {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-    }
-
-    .btn {
-      background: var(--panel-light);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 14px;
-      font-size: 16px;
-      color: var(--text);
+      background: #fff;
+      font-size: 13px;
       cursor: pointer;
     }
 
-    .btn.operator {
-      color: var(--blue);
+    .avatar {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: #e5e7eb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
     }
 
-    .btn.equals {
-      background: var(--blue);
-      color: #fff;
-      grid-column: span 2;
+    /* Content */
+    .content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 60px 24px;
     }
 
-    .btn.clear {
-      color: var(--orange);
+    .hero {
+      font-size: 32px;
+      font-weight: 600;
+      margin-bottom: 32px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .input-wrapper {
+      width: 100%;
+      max-width: 760px;
+      background: var(--input);
+      border-radius: 14px;
+      padding: 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .input-wrapper input {
+      flex: 1;
+      border: none;
+      outline: none;
+      background: transparent;
+      font-size: 15px;
+      color: var(--text);
+    }
+
+    .input-wrapper input::placeholder {
+      color: var(--muted);
+    }
+
+    .hint {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      max-width: 900px;
+      width: 100%;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+      display: flex;
+      gap: 12px;
+    }
+
+    .card-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: #f3f4f6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card-title {
+      font-weight: 600;
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    .card-desc {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    @media (max-width: 900px) {
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        display: none;
+      }
     }
   </style>
 </head>
 <body>
 
-  <aside class="sidebar">
-    <div class="brand">Tooly</div>
+  <div class="app">
 
-    <nav class="nav">
-      <div class="nav-item active">
-        <i data-lucide="calculator"></i>
-        Calculator
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="logo">CREAO</div>
+
+      <div class="nav-section">
+        <div class="nav-item active">
+          <i data-feather="edit-3"></i>
+          New Chat
+        </div>
+        <div class="nav-item">
+          <i data-feather="shopping-bag"></i>
+          Marketplace
+        </div>
+        <div class="nav-item">
+          <i data-feather="link"></i>
+          Integrations
+        </div>
       </div>
-      <div class="nav-item">
-        <i data-lucide="function-square"></i>
-        Scientific
+
+      <div class="nav-section">
+        <div class="nav-title">Build</div>
+        <div class="nav-item">
+          <i data-feather="grid"></i>
+          Apps
+        </div>
       </div>
-      <div class="nav-item">
-        <i data-lucide="dollar-sign"></i>
-        Currency
+
+      <div class="nav-section">
+        <div class="nav-title">Workspaces</div>
+        <div class="nav-item">
+          <i data-feather="folder"></i>
+          Default Workspace
+        </div>
       </div>
-      <div class="nav-item">
-        <i data-lucide="ruler"></i>
-        Unit Converter
+
+      <div class="sidebar-footer">
+        <div class="nav-item">
+          <i data-feather="user"></i>
+          My CREAO
+        </div>
       </div>
-      <div class="nav-item">
-        <i data-lucide="line-chart"></i>
-        Graphing
+    </aside>
+
+    <!-- Main -->
+    <main class="main">
+
+      <div class="topbar">
+        <button class="top-btn">Refer</button>
+        <button class="top-btn">Upgrade</button>
+        <div class="avatar">A</div>
       </div>
-    </nav>
-  </aside>
 
-  <main class="main">
-    <div class="header">
-      <div class="title">Calculator</div>
-    </div>
+      <div class="content">
+        <div class="hero">
+          Ask CREAO to do anything
+        </div>
 
-    <div class="calculator">
-      <div class="display">0</div>
+        <div class="input-wrapper">
+          <i data-feather="search"></i>
+          <input placeholder="Ask, search, and get things done. Try @ to add skills and context" />
+          <i data-feather="send"></i>
+        </div>
 
-      <div class="buttons">
-        <button class="btn clear">C</button>
-        <button class="btn">±</button>
-        <button class="btn">%</button>
-        <button class="btn operator">÷</button>
+        <div class="hint">
+          Not sure where to start? Try one of these:
+        </div>
 
-        <button class="btn">7</button>
-        <button class="btn">8</button>
-        <button class="btn">9</button>
-        <button class="btn operator">×</button>
+        <div class="cards">
+          <div class="card">
+            <div class="card-icon"><i data-feather="trending-up"></i></div>
+            <div>
+              <div class="card-title">Help me be more productive</div>
+              <div class="card-desc">Automate tasks, eliminate busywork, and get more done</div>
+            </div>
+          </div>
 
-        <button class="btn">4</button>
-        <button class="btn">5</button>
-        <button class="btn">6</button>
-        <button class="btn operator">−</button>
+          <div class="card">
+            <div class="card-icon"><i data-feather="rocket"></i></div>
+            <div>
+              <div class="card-title">I have a business idea</div>
+              <div class="card-desc">Explore what you need and turn your idea into an MVP</div>
+            </div>
+          </div>
 
-        <button class="btn">1</button>
-        <button class="btn">2</button>
-        <button class="btn">3</button>
-        <button class="btn operator">+</button>
+          <div class="card">
+            <div class="card-icon"><i data-feather="refresh-cw"></i></div>
+            <div>
+              <div class="card-title">Replace a manual process</div>
+              <div class="card-desc">Save time with smarter, automated solutions</div>
+            </div>
+          </div>
 
-        <button class="btn">0</button>
-        <button class="btn">.</button>
-        <button class="btn equals">=</button>
+          <div class="card">
+            <div class="card-icon"><i data-feather="users"></i></div>
+            <div>
+              <div class="card-title">Build something for my team</div>
+              <div class="card-desc">Create tools to help your team collaborate better</div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-icon"><i data-feather="database"></i></div>
+            <div>
+              <div class="card-title">Organize and track data</div>
+              <div class="card-desc">Build systems that turn scattered data into clarity</div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-icon"><i data-feather="smile"></i></div>
+            <div>
+              <div class="card-title">Better customer experience</div>
+              <div class="card-desc">Make every interaction count for your customers</div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </main>
 
+    </main>
+  </div>
+
+  <script src="https://unpkg.com/feather-icons"></script>
   <script>
-    lucide.createIcons();
+    feather.replace();
   </script>
+
 </body>
 </html>
